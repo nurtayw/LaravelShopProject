@@ -3,10 +3,10 @@
 @section('title', 'SHOW PAGE')
 
 @section('content')
-    <div class="container" style="margin-left: 120px; margin-top: 80px">
+    <div class="container" style="margin-left: 120px; margin-top: 80px;">
         <div class="justify-content-center">
             <div class="col-md-10">
-                <div class="card mt-3">
+                <div class="card mt-3" style="background:#ffffff; border: 1px solid black; border-radius: 10px">
                     <div class="card-header">
                         <div class="card-body justify-content-center">
                             <table>
@@ -23,6 +23,7 @@
                                     </td>
                                 </tr>
                             </table>
+                            <hr>
                             <form class="" style="margin-left: 700px">
                                 <button class="btn btn-outline-dark" type="submit">
                                     <i class="bi-cart-fill me-1"></i>
@@ -30,10 +31,32 @@
                                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                                 </button>
                             </form>
+                            @auth()
+                                <div style="margin-top: -40px">
+                                    <form action="{{route('shops.rate', $shop->id)}}" method="post">
+                                        @csrf
+                                        <select name="rating" style="width: 93px; border:1px solid black; border-radius: 5px; height: 35px">
+                                            @for($i=0; $i<=5; $i++)
+                                                <option {{{$MyRating==$i ? 'selected' : ''}}} value="{{$i}}">
+                                                    {{$i==0 ? 'Not rated' : $i}}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                        <button type="submit" class="btn btn-warning">Rate</button>
+                                    </form>
+                                    <form action="{{route('shops.unrate', $shop->id)}}" method="post" style="margin-left: 160px; margin-top: -38px">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Unrate</button>
+                                    </form>
+                                </div>
+                            @endauth
                         </div>
-                        <hr>
                     </div>
                 </div>
+
+                @if($avgRating != 0)
+                    <h3>Rate {{ $avgRating }}</h3>
+                @endif
                 <form style="margin-top: 10px;" action="{{route('comments.store')}}" method="post">
                     @csrf
                     <textarea style="width: 800px;" name="content" rows="2" cols="30" placeholder="Enter comment"></textarea>

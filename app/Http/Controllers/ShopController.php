@@ -11,6 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
 
+    public function unrate(Shop $shop){
+
+        $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
+        if ($shopsRated != null){
+            Auth::user()->shopsRated()->detach($shop->id);
+        }
+        return back();
+    }
+
+    public function rate(Request $request, Shop $shop){
+        $request->validate([
+           'rating' => 'required|min:1|max:5'
+        ]);
+        $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
+        if ($shopsRated != null)
+            Auth::user()->shopsRated()->updateExistingPivot($shop->id, ['rating' => $request->input('rating')]);
+        else
+            Auth::user()->shopsRated()->attach($shop->id, ['rating' => $request->input('rating')]);
+        return back();
+    }
+
     public function shopManufacturer(Manufacturer $manufacturer){
         return view('adm.shops.index', ['shops' => $manufacturer->shops, 'manufacturer' => Manufacturer::all()]);
     }
@@ -20,8 +41,28 @@ class ShopController extends Controller
     }
 
     public function show(Shop $shop){
-        return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all()]);
+
+        $avgRating=0;
+        $sum=0;
+        $ratedUsers = $shop->userRated()->get();
+
+       foreach ($ratedUsers as $user) {
+           $sum += $user->pivot->rating;
+       }
+       if (count($ratedUsers) > 0)
+           $avgRating = $sum / count($ratedUsers);
+        if (Auth::check()){
+
+            $MyRating=0;
+            $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
+
+            if ($shopsRated != null){
+                $MyRating = $shopsRated->pivot->rating;
+            }
+        }
+        return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all(), 'MyRating' => $MyRating, 'avgRating' => $avgRating]);
     }
+
 
     public function product(Request $request){
         if ($request->search){
@@ -78,5 +119,4 @@ class ShopController extends Controller
         $shop->delete();
         return redirect()->route('adm.shops.product')->withErrors('Destroyed successfully');
     }
-
 }

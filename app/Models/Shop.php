@@ -20,6 +20,12 @@ class Shop extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function userRated(){
+        return $this->belongsToMany(User::class)
+            ->withPivot('rating')
+            ->withTimestamps();
+    }
+
     public function comments(){
         return $this->hasMany(Comment::class);
     }
