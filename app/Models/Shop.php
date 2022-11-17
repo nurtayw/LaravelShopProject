@@ -12,6 +12,11 @@ class Shop extends Model
 
     protected $fillable = ['name', 'price', 'size', 'description', 'image', 'manufacturer_id', 'category_id', 'user_id'];
 
+
+    public function baskets() {
+        return $this->belongsToMany(Basket::class)->withPivot('quantity')->withTimestamps();
+    }
+
     public function manufacturer(){
         return $this->belongsTo(Manufacturer::class);
     }

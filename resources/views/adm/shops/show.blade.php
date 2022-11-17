@@ -24,7 +24,7 @@
                                 </tr>
                             </table>
                             <hr>
-                            <form class="" style="margin-left: 700px">
+                            <form action="{{route('basket.index')}}" class="" style="margin-left: 700px">
                                 <button class="btn btn-outline-dark" type="submit">
                                     <i class="bi-cart-fill me-1"></i>
                                     Cart
