@@ -13,10 +13,6 @@ class Shop extends Model
     protected $fillable = ['name', 'price', 'size', 'description', 'image', 'manufacturer_id', 'category_id', 'user_id'];
 
 
-    public function baskets() {
-        return $this->belongsToMany(Basket::class)->withPivot('quantity')->withTimestamps();
-    }
-
     public function manufacturer(){
         return $this->belongsTo(Manufacturer::class);
     }
@@ -25,9 +21,9 @@ class Shop extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function userRated(){
+    public function userCart(){
         return $this->belongsToMany(User::class)
-            ->withPivot('rating')
+            ->withPivot('quantity')
             ->withTimestamps();
     }
 

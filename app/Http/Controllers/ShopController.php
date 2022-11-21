@@ -11,25 +11,33 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
 
-    public function unrate(Shop $shop){
+    public function deleteCart(Shop $shop){
 
-        $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
-        if ($shopsRated != null){
-            Auth::user()->shopsRated()->detach($shop->id);
+        $cart =  Auth::user()->shopsCart()->where('shop_id', $shop->id)->get();
+
+        if ($cart != null){
+            Auth::user()->shopsCart()->detach($shop->id);
+        }
+        return view('cart.index',['cart' => $cart]);
+    }
+
+    public function addCart(Request $request, Shop $shop){
+        $request->validate([
+            'quantity' => 'required|numeric'
+        ]);
+
+        $cart = Auth::user()->shopsCart()->where('shop_id', $shop->id)->first();
+        if($cart != null){
+            Auth::user()->shopsCart()->updateExistingPivot($shop->id, ['quantity' => $request->input('quantity')]);
+        }else {
+            Auth::user()->shopsCart()->attach($shop->id, ['quantity' => $request->input('quantity')]);
         }
         return back();
     }
 
-    public function rate(Request $request, Shop $shop){
-        $request->validate([
-           'rating' => 'required|min:1|max:5'
-        ]);
-        $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
-        if ($shopsRated != null)
-            Auth::user()->shopsRated()->updateExistingPivot($shop->id, ['rating' => $request->input('rating')]);
-        else
-            Auth::user()->shopsRated()->attach($shop->id, ['rating' => $request->input('rating')]);
-        return back();
+    public function cartIndex(Shop $shop){
+        $x = Auth::user()->shopsCart()->get();
+        return view('cart.index', ['cart' => $x]);
     }
 
     public function shopManufacturer(Manufacturer $manufacturer){
@@ -41,26 +49,7 @@ class ShopController extends Controller
     }
 
     public function show(Shop $shop){
-
-        $avgRating=0;
-        $sum=0;
-        $ratedUsers = $shop->userRated()->get();
-
-       foreach ($ratedUsers as $user) {
-           $sum += $user->pivot->rating;
-       }
-       if (count($ratedUsers) > 0)
-           $avgRating = $sum / count($ratedUsers);
-        if (Auth::check()){
-
-            $MyRating=0;
-            $shopsRated = Auth::user()->shopsRated()->where('shop_id', $shop->id)->first();
-
-            if ($shopsRated != null){
-                $MyRating = $shopsRated->pivot->rating;
-            }
-        }
-        return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all(), 'MyRating' => $MyRating, 'avgRating' => $avgRating]);
+        return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all()]);
     }
 
 

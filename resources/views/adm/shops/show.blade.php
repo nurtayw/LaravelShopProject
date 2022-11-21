@@ -24,58 +24,36 @@
                                 </tr>
                             </table>
                             <hr>
-                            <form action="{{route('basket.index')}}" class="" style="margin-left: 700px">
-                                <button class="btn btn-outline-dark" type="submit">
-                                    <i class="bi-cart-fill me-1"></i>
-                                    Cart
-                                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                                </button>
-                            </form>
-                            @auth()
-                                <div style="margin-top: -40px">
-                                    <form action="{{route('shops.rate', $shop->id)}}" method="post">
-                                        @csrf
-                                        <select name="rating" style="width: 93px; border:1px solid black; border-radius: 5px; height: 35px">
-                                            @for($i=0; $i<=5; $i++)
-                                                <option {{{$MyRating==$i ? 'selected' : ''}}} value="{{$i}}">
-                                                    {{$i==0 ? 'Not rated' : $i}}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                        <button type="submit" class="btn btn-warning">Rate</button>
-                                    </form>
-                                    <form action="{{route('shops.unrate', $shop->id)}}" method="post" style="margin-left: 160px; margin-top: -38px">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">Unrate</button>
-                                    </form>
-                                </div>
-                            @endauth
+                                <form action="{{route('shops.cart', $shop->id)}}" style="margin-left: 700px" method="post">
+                                    @csrf
+                                <input type="number" name="quantity" placeholder="1" style="width: 50px">
+                                    <button class="btn btn-outline-dark" type="submit">
+                                        <i class="bi-cart-fill me-1"></i>
+                                        Cart
+                                    </button>
+                                </form>
                         </div>
                     </div>
                 </div>
-
-                @if($avgRating != 0)
-                    <h3>Rate {{ $avgRating }}</h3>
-                @endif
                 <form style="margin-top: 10px;" action="{{route('comments.store')}}" method="post">
                     @csrf
-                    <textarea style="width: 800px;" name="content" rows="2" cols="30" placeholder="Enter comment"></textarea>
+                    <textarea style="width: 800px; border-style: outset" name="content" rows="2" cols="30" placeholder="Enter comment"></textarea>
                     <input type="hidden" name="shop_id" value="{{$shop->id}}">
-                    <button style="margin-left: 20px; margin-top: -40px" type="submit" class="btn btn-success">Save</button>
+                    <button style="margin-left: 20px; margin-top: -40px" type="submit" class="btn btn-outline-dark">✓</button>
                 </form>
                 <ul class="list-group mt-3">
                     @foreach($shop->comments as $comment)
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="width: 800px; margin-top: 5px">
                             <small>author: <span style="color: #1a202c; font-size: 16px;">{{$comment->user->name}}</span></small>
                             <p>{{$comment->content}}</p>
-                            @can('delete', $comment)
-                                <form action="{{route('comments.destroy', $comment->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            @endcan
                     </li>
+                        @can('delete', $comment)
+                            <form action="{{route('comments.destroy', $comment->id)}}" method="post" style="margin-top: -50px; margin-left: 828px">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-dark">X</button>
+                            </form>
+                        @endcan
                     @endforeach
                 </ul>
             </div>

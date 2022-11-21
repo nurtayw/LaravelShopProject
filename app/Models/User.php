@@ -48,9 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Shop::class);
     }
 
-    public function shopsRated(){
+    public function shopsCart(){
         return $this->belongsToMany(Shop::class)
-            ->withPivot('rating')
+            ->withPivot('quantity')
             ->withTimestamps();
     }
 

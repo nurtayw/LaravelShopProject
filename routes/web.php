@@ -10,7 +10,6 @@ use App\Http\Controllers\Adm\UserController;
 use App\Http\Controllers\Adm\CategoryController;
 use App\Http\Controllers\Adm\ManufacturerController;
 use App\Http\Controllers\Adm\RoleController;
-use App\Http\Controllers\BasketController;
 
 
 Route::get('/', function () {
@@ -21,8 +20,10 @@ Route::get('/', function () {
         Route::get('/shops', [ShopController::class, 'show'])->name('shops.show');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('/comments', CommentController::class)->only('store', 'destroy');
-        Route::post('/shops/{shop}/rate', [ShopController::class, 'rate'])->name('shops.rate');
-        Route::post('/shops/{shop}/unrate', [ShopController::class, 'unrate'])->name('shops.unrate');
+
+        Route::get('/cart', [ShopController::class, 'cartIndex'])->name('cart.index');
+        Route::post('shops/{shop}/cart', [ShopController::class, 'addCart'])->name('shops.cart');
+        Route::post('shops/{shop}/uncart', [ShopController::class, 'deleteCart'])->name('shops.uncart');
 
         Route::prefix('adm')->as('adm.')->middleware('hasrole:admin,moderator')->group(function (){
 
