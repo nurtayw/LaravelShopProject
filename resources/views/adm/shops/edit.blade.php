@@ -36,12 +36,12 @@
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">Description</label>
-                        <textarea type="text" value="{{ $shop->description}}" class="form-control"  name="description" placeholder=""></textarea>
+                        <textarea type="text" value="{{$shop->description}}" class="form-control"  name="description" placeholder=""></textarea>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="imageGroup">Image</label>
-                        <input type="text" value="{{$shop->image}}" class="form-control  @error('image') is-invalid @enderror" id="imageInput" name="image" placeholder="Enter URL">
+                        <input type="file" value="{{$shop->image}}" class="form-control  @error('image') is-invalid @enderror" id="imageInput" name="image" placeholder="Enter URL">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mt-3" style="width: 330px">

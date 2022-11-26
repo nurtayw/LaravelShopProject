@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,17 +23,17 @@ class UserController extends Controller
 
 
     public function ban(User $user){
-        $user->update([
-            'is_active' => false,
-        ]);
-        return back();
+            $user->update([
+                'is_active' => false,
+            ]);
+        return back()->with('message','User banned');
     }
 
     public function unban(User $user){
         $user->update([
             'is_active' => true,
         ]);
-        return back();
+        return back()->with('message','User unbanned');
     }
 
     public function edit(User $user){
@@ -52,5 +53,7 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('adm.users')->withErrors('Deleted successfully');
     }
+
+
 
 }

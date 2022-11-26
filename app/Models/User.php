@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\Translation\Dumper\PoFileDumper;
 
 class User extends Authenticatable
 {
@@ -54,6 +55,18 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function BoughtCart(){
+        return $this->belongsToMany(Shop::class)
+            ->withPivot('quantity', 'color', 'status')
+            ->withTimestamps();
+    }
+
+    public function postswithStatus($status){
+        return $this->belongsToMany(Shop::class)
+            ->wherePivot('status', $status)
+            ->withPivot('quantity', 'color', 'status')
+            ->withTimestamps();
+    }
 
     public function comments(){
         return $this->hasMany(Comment::class);

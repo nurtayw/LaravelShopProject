@@ -68,6 +68,7 @@
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{route('adm.shops.product')}}">Product List</a>
+                            <a class="nav-link" href="{{route('adm.cart')}}">Cart</a>
                             <a class="nav-link" href="{{route('adm.category.index')}}">Categories</a>
                             <a class="nav-link" href="{{route('adm.manufacturer.index')}}">Manufacturer</a>
                         </nav>
@@ -78,6 +79,26 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
+
+            <div class="container" style="width: 500px; height: 80px; margin-left: 450px; margin-top: 10px">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors ->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+
+            <div class="container" style="width: 500px; height: 100px; margin-left: 500px; margin-top: 10px">
+                @if(session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+            </div>
 
             <div class="container-fluid">
                 @yield('content')

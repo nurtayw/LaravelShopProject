@@ -10,11 +10,14 @@
                 <div class="card mt-3 col-lg-3 m-lg-3" style="background: white">
                     <div class="card-header" style="background: white">
                         <div class="card-body">
-                            <img src="{{$shop->image}}" class="card-img-top" alt="" style="margin: fill; width: 230px; height: 200px;">
+                            <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="margin: fill; width: 230px; height: 200px;">
                             <h5 class="card-title">{{ $shop->name }}</h5>
                             <p class="card-text">{{ $shop->price }} $</p>
-                            <a class="btn btn-primary">Buy</a>
-                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 37px; margin-top: -38px">
+                            <form class="form-check" action="{{route('cart.buy')}}" method="post">
+                                @csrf
+                                <button class="btn btn-success" type="submit">Buy</button>
+                            </form>
+                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 67px; margin-top: -39px">
                                 @csrf
                                 <button class="btn btn-outline-dark" type="submit">X</button>
                             </form>

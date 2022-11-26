@@ -15,7 +15,6 @@ return new class extends Migration
             $table->integer('price');
             $table->string('size');
             $table->text('description');
-            $table->string('image');
 
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
 

@@ -23,7 +23,8 @@ Route::get('/', function () {
 
         Route::get('/cart', [ShopController::class, 'cartIndex'])->name('cart.index');
         Route::post('shops/{shop}/cart', [ShopController::class, 'addCart'])->name('shops.cart');
-        Route::post('shops/{shop}/uncart', [ShopController::class, 'deleteCart'])->name('shops.uncart');
+        Route::post('/shops/{shop}/uncart', [ShopController::class, 'deleteCart'])->name('shops.uncart');
+        Route::post('/cart', [ShopController::class, 'buy'])->name('cart.buy');
 
         Route::prefix('adm')->as('adm.')->middleware('hasrole:admin,moderator')->group(function (){
 
@@ -38,6 +39,8 @@ Route::get('/', function () {
             Route::get('/shops{shop}/edit', [ShopController::class, 'edit'])->name('shops.edit');
             Route::post('/shops/store', [ShopController::class, 'store'])->name('shops.store');
             Route::delete('/shops/{shop}', [ShopController::class, 'destroy'])->name('shops.destroy');
+            Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
+            Route::put('/cart{cart}/confirm', [ShopController::class, 'confirm'])->name('cart.confirm');
 
 
             Route::get('/shops/product', [ShopController::class, 'product'])->name('product');

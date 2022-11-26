@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Shop;
@@ -11,32 +12,58 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
 
-    public function deleteCart(Shop $shop){
-
-        $cart =  Auth::user()->shopsCart()->where('shop_id', $shop->id)->get();
-
-        if ($cart != null){
-            Auth::user()->shopsCart()->detach($shop->id);
-        }
-        return view('cart.index',['cart' => $cart]);
+    public function confirm(Cart $cart){
+        $cart->update([
+           'status' => 'confirmed'
+        ]);
+        return back();
     }
 
-    public function addCart(Request $request, Shop $shop){
-        $request->validate([
-            'quantity' => 'required|numeric'
-        ]);
+    public function cart(){
+        $cart = Cart::where('status', 'ordered')->with(['shop', 'user'])->get();
+        return view('adm.cart', ['cart' => $cart]);
+    }
 
-        $cart = Auth::user()->shopsCart()->where('shop_id', $shop->id)->first();
-        if($cart != null){
-            Auth::user()->shopsCart()->updateExistingPivot($shop->id, ['quantity' => $request->input('quantity')]);
-        }else {
-            Auth::user()->shopsCart()->attach($shop->id, ['quantity' => $request->input('quantity')]);
+    public function buy(){
+        $buy = Auth::user()->postswithStatus('in_cart')->allRelatedIds();
+        foreach($buy as $b){
+            Auth::user()->postswithStatus('in_cart')->updateExistingPivot($b, ['status' => 'ordered']);
         }
         return back();
     }
 
-    public function cartIndex(Shop $shop){
-        $x = Auth::user()->shopsCart()->get();
+    public function deleteCart(Shop $shop){
+
+        $cart =  Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->get();
+
+        if ($cart != null){
+            Auth::user()->postswithStatus('in_cart')->detach($shop->id);
+        }
+
+        return view('cart.index',['cart' => $cart]);
+    }
+
+    public function addCart(Request $request, Shop $shop){
+        $carts = Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->first();
+
+        if($carts != null){
+            Auth::user()->postswithStatus('in_cart')->updateExistingPivot($shop->id,
+                [
+                    'color' => $request->input('color'),
+                    'quantity' => $carts->pivot->quantity+$request->input('quantity'),
+                ]);
+        }else{
+            Auth::user()->postswithStatus('in_cart')->attach($shop->id,
+            [
+                'color' => $request->input('color'),
+                'quantity' => $request->input('quantity')
+            ]);
+        }
+        return back()->with('message', 'Successfully added in cart');
+    }
+
+    public function cartIndex(){
+        $x = Auth::user()->postswithStatus('in_cart')->get();
         return view('cart.index', ['cart' => $x]);
     }
 
@@ -78,10 +105,14 @@ class ShopController extends Controller
             'price' => 'required|numeric',
             'size' => 'required|numeric',
             'description' => 'required|',
-            'image' =>'required|string',
+            'image' =>'required|image|mimes:jpg,png,jpeg,svg|max:2048',
             'manufacturer_id' => 'required',
             'category_id' => 'required',
         ]);
+
+        $fillname = time().$request->file('image')->getClientOriginalName();
+        $image_path = $request->file('image')->storeAs('shops', $fillname, 'public');
+        $validated ['image'] = '/storage/'.$image_path;
         Auth::user()->shops()->create($validated);
 
         return redirect()->route('adm.shops.product')->with('message', 'Saved successfully');
@@ -101,6 +132,7 @@ class ShopController extends Controller
             'manufacturer_id' => $request->input('manufacturer_id'),
             'category_id' => $request->input('category_id'),
         ]);
+
         return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', 'Updated Successfully');
     }
 

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('shop_user', function (Blueprint $table) {
@@ -18,15 +14,12 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('quantity');
+            $table->string('color');
+            $table->string('status')->default('in_cart');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('shop_user');

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row justify-content-center" style="margin-left: 200px;">
             <div class="col-md-10">
-                <form action="{{ route('adm.shops.store')}}" method="post">
+                <form action="{{ route('adm.shops.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mt-5" style="width: 330px">
                         <label for="titleInput">Name</label>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="imageGroup">Image</label>
-                        <input type="text" class="form-control  @error('image') is-invalid @enderror" id="imageInput" name="image" placeholder="Enter URL">
+                        <input type="file" class="form-control  @error('image') is-invalid @enderror" id="imageInput" name="image" placeholder="Enter URL">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">

@@ -12,7 +12,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="{{$shop->image}}" class="card-img-top" alt="" style="width: 250px; height: 250px;">
+                                        <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="width: 250px; height: 250px;">
                                     </td>
                                     <td style="padding-left: 50px">
                                         <h5 class="card-title">Name: {{$shop->name }}</h5>
@@ -24,14 +24,19 @@
                                 </tr>
                             </table>
                             <hr>
-                                <form action="{{route('shops.cart', $shop->id)}}" style="margin-left: 700px" method="post">
-                                    @csrf
+                            <form action="{{route('shops.cart', $shop->id)}}" style="margin-left: 700px" method="post">
+                                @csrf
+                                <select name="color">
+                                    <option value="Black">Black</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="White">White</option>
+                                </select>
                                 <input type="number" name="quantity" placeholder="1" style="width: 50px">
-                                    <button class="btn btn-outline-dark" type="submit">
-                                        <i class="bi-cart-fill me-1"></i>
-                                        Cart
-                                    </button>
-                                </form>
+                                <button class="btn btn-outline-dark" type="submit">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Cart
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

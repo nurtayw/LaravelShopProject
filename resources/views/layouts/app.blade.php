@@ -86,21 +86,25 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
 
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors ->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <div class="container" style="width: 500px; height: 80px; margin-left: 450px; margin-top: -80px">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors ->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
 
-        @if(session('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        @endif
+       <div class="container" style="width: 500px; height: 100px; margin-left: 450px; margin-top: -80px">
+           @if(session('message'))
+               <div class="alert alert-success" role="alert">
+                   {{ session('message') }}
+               </div>
+           @endif
+       </div>
 
         <div class="container">
             @yield('content')
