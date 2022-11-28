@@ -40,10 +40,10 @@
                   <a href="{{route('adm.shops.edit', $products[$i]->id)}}" class="btn btn-success">EDIT</a>
                 </td>
                 <td>
-                    <form action="{{route('adm.shops.destroy', $products[$i]->id)}}" method="post">
+                    <form style="margin-top: -4px" action="{{route('adm.shops.destroy', $products[$i]->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="flex-sm-row btn btn-danger mt-1" type="submit">Delete</button>
+                        <button onclick="return confirm('Are you sure?')" class="flex-sm-row btn btn-danger mt-1" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>

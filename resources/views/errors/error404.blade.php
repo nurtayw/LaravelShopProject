@@ -5,7 +5,7 @@
 @section('content')
     <style>
         .page_404 {
-            margin-left: 300px;
+            margin-left: 200px;
             margin-top: 100px;
             width: 900px;
             padding: 40px 0;

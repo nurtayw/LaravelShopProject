@@ -42,7 +42,7 @@ class ManufacturerController extends Controller
 
     public function destroy(Manufacturer $manufacturer){
         $manufacturer->delete();
-        return redirect()->route('adm.manufacturer.index')->withErrors('Destroyed successfully');
+        return redirect()->route('adm.manufacturer.index')->with('error','Destroyed');
     }
 
     public function show(){

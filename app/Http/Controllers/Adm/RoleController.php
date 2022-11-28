@@ -39,7 +39,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role){
         $role->delete();
-        return redirect()->route('adm.roles.index')->withErrors('Destroyed successfully');
+        return redirect()->route('adm.roles.index')->with('error','Destroyed');
     }
 
     public function show(){

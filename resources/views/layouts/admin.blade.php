@@ -44,9 +44,9 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Core</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{route('shops.index')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
+                        User Page
                     </a>
                     <div class="sb-sidenav-menu-heading">Interface</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -80,25 +80,18 @@
     <div id="layoutSidenav_content">
         <main>
 
-            <div class="container" style="width: 500px; height: 80px; margin-left: 450px; margin-top: 10px">
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors ->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+            {{-- Message --}}
+            @if (Session::has('message'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>Success!</strong> {{ session('message') }}
+                </div>
+            @endif
 
-            <div class="container" style="width: 500px; height: 100px; margin-left: 500px; margin-top: 10px">
-                @if(session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-            </div>
+            @if (Session::has('error'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Deleted</strong> {{ session('error') }}
+                </div>
+            @endif
 
             <div class="container-fluid">
                 @yield('content')

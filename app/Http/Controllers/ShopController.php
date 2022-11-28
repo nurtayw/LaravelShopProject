@@ -16,7 +16,7 @@ class ShopController extends Controller
         $cart->update([
            'status' => 'confirmed'
         ]);
-        return back();
+        return back()->with('message', 'Confirmed');
     }
 
     public function cart(){
@@ -29,7 +29,7 @@ class ShopController extends Controller
         foreach($buy as $b){
             Auth::user()->postswithStatus('in_cart')->updateExistingPivot($b, ['status' => 'ordered']);
         }
-        return back();
+        return back()->with('message', 'You have purchased this item.Please waiting for confirm');
     }
 
     public function deleteCart(Shop $shop){
@@ -40,7 +40,7 @@ class ShopController extends Controller
             Auth::user()->postswithStatus('in_cart')->detach($shop->id);
         }
 
-        return view('cart.index',['cart' => $cart]);
+        return view('cart.index',['cart' => $cart])->with('error', 'Deleted from cart');
     }
 
     public function addCart(Request $request, Shop $shop){
@@ -59,7 +59,7 @@ class ShopController extends Controller
                 'quantity' => $request->input('quantity')
             ]);
         }
-        return back()->with('message', 'Successfully added in cart');
+        return back()->with('message', 'Successfully added in cart')->with('message', 'Added to cart');
     }
 
     public function cartIndex(){
@@ -138,6 +138,6 @@ class ShopController extends Controller
 
     public function destroy(Shop $shop){
         $shop->delete();
-        return redirect()->route('adm.shops.product')->withErrors('Destroyed successfully');
+        return redirect()->route('adm.shops.product')->with('error','Deleted');
     }
 }

@@ -51,7 +51,7 @@ class UserController extends Controller
 
     public function destroy(User $user){
         $user->delete();
-        return redirect()->route('adm.users')->withErrors('Deleted successfully');
+        return redirect()->route('adm.users')->with('error','You deleted your account!!!!');
     }
 
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Adm\UserController;
 use App\Http\Controllers\Adm\CategoryController;
 use App\Http\Controllers\Adm\ManufacturerController;
 use App\Http\Controllers\Adm\RoleController;
+use App\Http\Controllers\User2Controller;
 
 
 Route::get('/', function () {
@@ -20,6 +21,11 @@ Route::get('/', function () {
         Route::get('/shops', [ShopController::class, 'show'])->name('shops.show');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('/comments', CommentController::class)->only('store', 'destroy');
+
+        Route::get('/users', [User2Controller::class, 'index'])->name('users.index');
+        Route::get('/users/{user}/edit', [User2Controller::class, 'edit'])->name('users.edit');
+        Route::delete('/users/{user}', [User2Controller::class, 'destroy'])->name('users.destroy');
+        Route::put('/users/{user}', [User2Controller::class, 'update'])->name('users.update');
 
         Route::get('/cart', [ShopController::class, 'cartIndex'])->name('cart.index');
         Route::post('shops/{shop}/cart', [ShopController::class, 'addCart'])->name('shops.cart');

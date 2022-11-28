@@ -60,7 +60,7 @@
                    <form action="{{route('adm.users.destroy', $users[$i]->id)}} " method="post">
                        @csrf
                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">DELETE</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">DELETE</button>
                    </form>
                 </td>
             </tr>

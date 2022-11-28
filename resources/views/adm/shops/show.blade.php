@@ -24,9 +24,9 @@
                                 </tr>
                             </table>
                             <hr>
-                            <form action="{{route('shops.cart', $shop->id)}}" style="margin-left: 700px" method="post">
+                            <form action="{{route('shops.cart', $shop->id)}}" style="" method="post">
                                 @csrf
-                                <select name="color">
+                                <select name="color" style="height: 30px; border-radius: 5px;">
                                     <option value="Black">Black</option>
                                     <option value="Blue">Blue</option>
                                     <option value="White">White</option>
@@ -42,21 +42,21 @@
                 </div>
                 <form style="margin-top: 10px;" action="{{route('comments.store')}}" method="post">
                     @csrf
-                    <textarea style="width: 800px; border-style: outset" name="content" rows="2" cols="30" placeholder="Enter comment"></textarea>
+                    <textarea style="width: 700px; border-style: outset" name="content" rows="2" cols="30" placeholder="Enter comment"></textarea>
                     <input type="hidden" name="shop_id" value="{{$shop->id}}">
                     <button style="margin-left: 20px; margin-top: -40px" type="submit" class="btn btn-outline-dark">✓</button>
                 </form>
                 <ul class="list-group mt-3">
                     @foreach($shop->comments as $comment)
-                    <li class="list-group-item d-flex justify-content-between align-items-start" style="width: 800px; margin-top: 5px">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="width: 700px; margin-top: 5px">
                             <small>author: <span style="color: #1a202c; font-size: 16px;">{{$comment->user->name}}</span></small>
                             <p>{{$comment->content}}</p>
                     </li>
                         @can('delete', $comment)
-                            <form action="{{route('comments.destroy', $comment->id)}}" method="post" style="margin-top: -50px; margin-left: 828px">
+                            <form action="{{route('comments.destroy', $comment->id)}}" method="post" style="margin-top: -50px; margin-left: 728px">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-dark">X</button>
+                                <button type="submit"  onclick="return confirm('Are you sure?')" class="btn btn-outline-dark">X</button>
                             </form>
                         @endcan
                     @endforeach

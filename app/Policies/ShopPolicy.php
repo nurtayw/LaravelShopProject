@@ -12,7 +12,7 @@ class ShopPolicy
 
     public function viewAny(User $user)
     {
-        //
+        return ($user->role->name != 'user');
     }
 
     public function view(User $user, Shop $phone){
