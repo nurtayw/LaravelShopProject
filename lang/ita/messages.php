@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'name' => 'Nome',
+    'login' => 'Login',
+    'register' => 'Registrati',
+    'category' => 'Categoria',
+    'home'  => 'Pagina principale',
+    'email' => 'Indirizzo e-mail',
+    'password' => 'Parola d ordine',
+    'remember' => 'Ricordati di me',
+    'conform_password' => 'Conferma password',
+    'price' => 'Prezzo',
+    'size' => 'Dimensione',
+    'manufacturer' => 'Produttrice',
+    'description' => 'Descrizione',
+    'author' => 'autore',
+    'comment' => 'commento',
+    'entr_cmt' => 'lascia un commento',
+    'profile' => 'Profilo',
+    'logout' => 'Disconnettersi',
+    'image' => 'Immagine',
+    'brand' => 'Marca',
+    'u_cart' => 'Il tuo carrello',
+    'buy' => 'Acquistare    ',
+];
