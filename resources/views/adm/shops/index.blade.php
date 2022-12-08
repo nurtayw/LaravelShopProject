@@ -1,22 +1,95 @@
 @extends('layouts.app')
-
 @section('title', 'MAIN  PAGE')
-
 @section('content')
-    <div class="container" style="margin-left: 7rem; margin-top: 7rem">
-        <div class="row" style="background: white">
-            @foreach($shops as $shop)
-                <div class="card mt-3 col-lg-3 m-lg-3" style="background: white">
-                    <div class="card-header" style="background: white">
-                        <div class="card-body">
-                            <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="width: 230px; height: 200px; margin-left: -30px;">
-                            <h5 class="card-title">{{ $shop->name }}</h5>
-                            <p class="card-text">{{ $shop->price }} $</p>
-                            <a href="{{ route('shops.show', $shop->id) }}" class="flex-sm-row btn " style="background: #000000; color: white">Choose</a>
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        <div class="shop__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">{{__('messages.category')}}</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    @isset($categories)
+                                                        @foreach($categories as $cat)
+                                                            <li>
+                                                                <a
+                                                                    href="{{ route('shops.category', $cat->id) }}">{{ $cat->{'name_'.app()->getLocale()} }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    @endisset
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseTwo">{{__('messages.brand')}}</a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__brand">
+                                                <ul>
+                                                    @isset($manufacturer)
+                                                        @foreach($manufacturer as $cat)
+                                                            <li>
+                                                                <a
+                                                                    href="{{ route('shops.manufacturer', $cat->id) }}">{{ $cat->{'country_'.app()->getLocale()} }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    @endisset
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+                <div class="col-9">
+                    <div class="row">
+                        <div class="card mt-3 col-4 m-lg-3">
+                            <div class="product__item">
+                                @foreach($shops as $shop)
+                                <div class="product__item__pic set-bg" data-setbg="{{asset($shop->image)}}" style="margin-top: 20px">
+                                    <ul class="product__hover">
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6>{{ $shop->{'name_'.app()->getLocale()} }}</h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <h5>${{ $shop->price }}</h5>
+                                </div>
+                                    <a href="{{ route('shops.show', $shop->id) }}" class="flex-sm-row btn " style="background: #000000; color: white">{{__('buttons.choose')}}</a>
+                                    <hr>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 @endsection

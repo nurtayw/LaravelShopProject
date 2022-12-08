@@ -12,9 +12,7 @@
             <button class="btn btn-success">Search</button>
         </div>
     </form>
-
     <h1>Product List</h1>
-
     <a class="btn btn-outline-success mt-5" href="{{route('adm.shops.create')}}">Add</a>
     <table class="table">
         <thead class="thead-dark">
@@ -29,25 +27,25 @@
         </tr>
         </thead>
         <tbody>
-        @for($i=0; $i<count($products); $i++)
-            <tr>
-                <th scope="row">{{$i+1}}</th>
-                <td>{{$products[$i]->name}}</td>
-                <td>{{$products[$i]->price}}</td>
-                <td>{{$products[$i]->manufacturer->country}}</td>
-                <td>{{$products[$i]->category->name}}</td>
-                <td>
-                  <a href="{{route('adm.shops.edit', $products[$i]->id)}}" class="btn btn-success">EDIT</a>
-                </td>
-                <td>
-                    <form style="margin-top: -4px" action="{{route('adm.shops.destroy', $products[$i]->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('Are you sure?')" class="flex-sm-row btn btn-danger mt-1" type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endfor
+            @for($i=0; $i<count($products); $i++)
+                <tr>
+                    <th scope="row">{{$i+1}}</th>
+                    <td>{{$products[$i]->name}}</td>
+                    <td>{{$products[$i]->price}}</td>
+                    <td>{{$products[$i]->manufacturer->country}}</td>
+                    <td>{{$products[$i]->category->name}}</td>
+                    <td>
+                      <a href="{{route('adm.shops.edit', $products[$i]->id)}}" class="btn btn-success">EDIT</a>
+                    </td>
+                    <td>
+                        <form style="margin-top: -4px" action="{{route('adm.shops.destroy', $products[$i]->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Are you sure?')" class="flex-sm-row btn btn-danger mt-1" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endfor
         </tbody>
     </table>
 @endsection

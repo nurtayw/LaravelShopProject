@@ -45,7 +45,5 @@ class ManufacturerController extends Controller
         return redirect()->route('adm.manufacturer.index')->with('error','Destroyed');
     }
 
-    public function show(){
-    }
-
+    public function show(){}
 }

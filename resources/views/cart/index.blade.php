@@ -3,7 +3,7 @@
 @section('title', 'CART')
 
 @section('content')
-    <h1 class="align-items-center">Your Cart</h1>
+    <h1 class="align-items-center" style="margin-left: 400px">{{__('messages.u_cart')}}</h1>
     <div class="container" style="margin-left: 7rem; margin-top: 7rem">
         <div class="row">
             @foreach($cart as $shop)
@@ -11,15 +11,15 @@
                     <div class="card-header" style="background: white">
                         <div class="card-body">
                             <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="margin: fill; width: 230px; height: 200px;">
-                            <h5 class="card-title">{{ $shop->name }}</h5>
+                            <h5 class="card-title">{{ $shop->{'name_'.app()->getLocale()} }}</h5>
                             <p class="card-text">{{ $shop->price }} $</p>
                             <form class="form-check" action="{{route('cart.buy')}}" method="post">
                                 @csrf
-                                <button class="btn btn-success" type="submit">Buy</button>
+                                <button class="btn btn-success" type="submit" style="width: 150px; margin-left: -20px">{{__('messages.buy')}}</button>
                             </form>
-                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 67px; margin-top: -39px">
+                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 160px; margin-top: -39px">
                                 @csrf
-                                <button class="btn btn-outline-dark" type="submit">X</button>
+                                <button class="btn btn-outline-dark" onclick="return confirm('Are you sure?')" type="submit">X</button>
                             </form>
                         </div>
                     </div>

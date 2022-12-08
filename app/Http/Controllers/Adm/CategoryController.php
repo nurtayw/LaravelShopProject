@@ -21,14 +21,16 @@ class CategoryController extends Controller
     public function store(Request $request){
         $validated = $request->validate([
             'name' => 'string|max:255',
+            'name_kz' => 'string|max:255',
+            'name_ru' => 'string|max:255',
+            'name_en' => 'string|max:255',
+            'name_ita' => 'string|max:255',
         ]);
         Category::create($validated);
         return redirect()->route('adm.category.index')->with('message', 'Added a new category');
     }
 
-    public function show(){
-        return back();
-    }
+    public function show(){}
 
     public function edit(Category $category){
         return view('adm.category.edit', ['category' => $category]);
@@ -37,6 +39,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category){
         $category->update([
             'name' => $request->input('name'),
+            'name_kz' => $request->input('name_kz'),
+            'name_ru' => $request->input('name_ru'),
+            'name_en' => $request->input('name_en'),
+            'name_ita' => $request->input('name_ita'),
 
         ]);
         return redirect()->route('adm.category')->with('message', 'Updated Successfully');
@@ -46,5 +52,4 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('adm.category.index')->with('error','Destroyed');
     }
-
 }

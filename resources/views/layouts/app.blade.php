@@ -1,122 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
-    <!-- CSS only -->
-    <!-- JavaScript Bundle with Popper -->
-{{--    <script src="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')}}" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>--}}
-{{--    <link href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">--}}
-    <!-- Favicon-->
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion</title>
+
+    <!-- Google Font -->
+    <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap')}}"
+          rel="stylesheet">
+
+    <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
     <!-- Bootstrap icons-->
     <link href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css')}}" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('user2/css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('user2/css/style.css')}}" type="text/css">
 </head>
+
 <body>
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                @can('viewAny', \App\Models\Shop::class)
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{route('adm.shops.product')}}">AdminPanel</a></li>
-                @endcan
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{route('shops.index')}}">Home</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @isset($categories)
-                            @foreach($categories as $cat)
-                               <li>
-                                    <a class="dropdown-item"
-                                       href="{{ route('shops.category', $cat->id) }}">{{$cat->name}}</a>
-                                </li>
-                            @endforeach
-                        @endisset
-                    </ul>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                @guest
-                    @if (Route::has('login.form'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login.form') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
+<!-- Page Preloder -->
+<div id="">
+    <div class="loader"></div>
+</div>
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header__top__left">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5">
+                    <div class="header__top__right">
+                        <div class="header__top__hover">
+                            <span>{{__('messages.profile')}}<i class="arrow_carrot-down"></i></span>
+                            <ul>
+                                @guest
+                                    @if (Route::has('login.form'))
+                                        <li>
+                                            <a style="color: black" href="{{ route('login.form') }}">{{ __('messages.login') }}</a>
+                                        </li>
+                                    @endif
 
-                    @if (Route::has('register.form'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register.form') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" v-pre>
-                            Profile
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 200px; margin-left: -50px; height: 250px; ">
-                            <a class="dropdown-item" href="{{route('users.index')}}">{{ Auth::user()->name }}</a>
-                            <a class="dropdown-item" href="{{ route('cart.index') }}">Cart</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                                        @if (Route::has('register.form'))
+                                            <li>
+                                                <a style="color: black" href="{{ route('register.form') }}">{{ __('messages.register') }}</a>
+                                            </li>
+                                        @endif
+                                @else
+                                   <div>
+                                     <ul>
+                                         <li>
+                                             <a style="color: black;" href="{{route('profile')}}">
+                                                 {{__('messages.profile')}}
+                                             </a>
+                                         </li>
+                                         <li>
+                                             <a style="color: black" class="nav-link" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                                 {{__('messages.logout')}}
+                                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                 @csrf
+                                             </form>
+                                         </li>
+                                     </ul>
+                                   </div>
+                                @endguest
+                            </ul>
                         </div>
-                    </li>
-                @endguest
-            </ul>
+                        <div class="header__top__hover" style="margin-left: 30px">
+                            <span>{{ config('app.languages') [app()->getLocale()]}}<i class="arrow_carrot-down"></i></span>
+                            <ul>
+                                <li>
+                                @foreach(config('app.languages') as $ln => $lang)
+                                    <a style="color: black" href="{{route('switch.lang', $ln)}}">
+                                        {{$lang}}
+                                    </a>
+                                @endforeach
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="#"><img src="{{asset('user2/img/logo.png')}}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="header__menu mobile-menu">
+                    <ul>
+                        @can('viewAny', \App\Models\Shop::class)
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{route('adm.shops.product')}}">AdminPanel</a></li>
+                        @endcan
+                        <li><a href="{{route('shops.index')}}">{{__('messages.home')}}</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="header__nav__option">
+                    <a href="{{route('cart.index')}}"><img src="{{asset('user2/img/icon/heart.png')}}" alt=""></a>
+                </div>
+            </div>
         </div>
     </div>
 </header>
-<!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
 
 
-        @if (Session::has('message'))
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <strong>Success!</strong> {{ session('message') }}
-            </div>
-        @endif
-
-        @if (Session::has('error'))
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <strong>Deleted</strong> {{ session('error') }}
-            </div>
-        @endif
-
-
-        <div class="container">
-            @yield('content')
-        </div>
-
+{{-- Message --}}
+@if (Session::has('message'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>Success !</strong> {{ session('message') }}
     </div>
-</section>
-<!-- Bootstrap core JS-->
-<script src="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js')}}"></script>
-<!-- Core theme JS-->
-<script src="{{asset('js/scripts.js')}}"></script>
+@endif
+
+@if (Session::has('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>!!!</strong> {{ session('error') }}
+    </div>
+@endif
+
+<!-- Shop Section Begin -->
+<div class="container" style="margin-top: 50px; margin-bottom: 200px;">
+    @yield('content')
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="#"><img src="{{asset('user2/img/footer-logo.png')}}" alt=""></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="{{asset('user2/img/payment.png')}}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
+
+<!-- Js Plugins -->
+<script src="{{asset('user2/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('user2/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('user2/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('user2/js/jquery.nicescroll.min.js')}}"></script>
+<script src="{{asset('user2/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('user2/js/jquery.countdown.min.js')}}"></script>
+<script src="{{asset('user2/js/jquery.slicknav.js')}}"></script>
+<script src="{{asset('user2/js/mixitup.min.js')}}"></script>
+<script src="{{asset('user/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('user2/js/main.js')}}"></script>
 </body>
+
 </html>

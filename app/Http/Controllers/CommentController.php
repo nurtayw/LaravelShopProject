@@ -14,7 +14,7 @@ class CommentController extends Controller
           'shop_id' => 'required|numeric'
        ]);
      Auth::user()->comments()->create($validated);
-     return back()->with('message', 'Comment is added');
+     return redirect()->back()->with('message', 'Comment addded');
    }
 
    public function destroy(Comment $comment){
@@ -22,5 +22,4 @@ class CommentController extends Controller
         $comment->delete();
         return back()->with('error','Destroyed');
    }
-
 }

@@ -9,13 +9,13 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content', 'shop_id', 'user_id'];
+        protected $fillable = ['content', 'shop_id', 'user_id'];
 
-    public function shop(){
-        return $this->belongsTo(Shop::class);
-    }
+        public function shop(){
+            return $this->belongsTo(Shop::class);
+        }
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
+        public function user(){
+            return $this->belongsTo(User::class);
+        }
 }

@@ -10,22 +10,26 @@ use App\Http\Controllers\Adm\UserController;
 use App\Http\Controllers\Adm\CategoryController;
 use App\Http\Controllers\Adm\ManufacturerController;
 use App\Http\Controllers\Adm\RoleController;
-use App\Http\Controllers\User2Controller;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LangController;
 
 
 Route::get('/', function () {
     return redirect()->route('shops.index');
 });
+
+Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.lang');
+
     Route::middleware('auth')->group(function (){
+        Route::get('/profile/profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::get('/profile{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile/{profile}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
         Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
         Route::get('/shops', [ShopController::class, 'show'])->name('shops.show');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('/comments', CommentController::class)->only('store', 'destroy');
-
-        Route::get('/users', [User2Controller::class, 'index'])->name('users.index');
-        Route::get('/users/{user}/edit', [User2Controller::class, 'edit'])->name('users.edit');
-        Route::delete('/users/{user}', [User2Controller::class, 'destroy'])->name('users.destroy');
-        Route::put('/users/{user}', [User2Controller::class, 'update'])->name('users.update');
 
         Route::get('/cart', [ShopController::class, 'cartIndex'])->name('cart.index');
         Route::post('shops/{shop}/cart', [ShopController::class, 'addCart'])->name('shops.cart');

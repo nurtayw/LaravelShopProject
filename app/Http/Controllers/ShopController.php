@@ -33,13 +33,9 @@ class ShopController extends Controller
     }
 
     public function deleteCart(Shop $shop){
-
         $cart =  Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->get();
-
-        if ($cart != null){
+        if ($cart != null)
             Auth::user()->postswithStatus('in_cart')->detach($shop->id);
-        }
-
         return view('cart.index',['cart' => $cart])->with('error', 'Deleted from cart');
     }
 
@@ -59,7 +55,7 @@ class ShopController extends Controller
                 'quantity' => $request->input('quantity')
             ]);
         }
-        return back()->with('message', 'Successfully added in cart')->with('message', 'Added to cart');
+        return back()->with('message', 'Successfully added in cart');
     }
 
     public function cartIndex(){
@@ -74,11 +70,9 @@ class ShopController extends Controller
     public function shopCategory(Category $category){
         return view('adm.shops.index', ['shops' => $category->shops, 'categories' => Category::all()]);
     }
-
     public function show(Shop $shop){
         return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all()]);
     }
-
 
     public function product(Request $request){
         if ($request->search){
@@ -102,9 +96,17 @@ class ShopController extends Controller
     public function store(Request $request){
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'name_kz' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'name_ru' => 'required|string|max:255',
+            'name_ita' => 'required|string|max:255',
             'price' => 'required|numeric',
             'size' => 'required|numeric',
-            'description' => 'required|',
+            'description' => 'required',
+            'description_kz' => 'required',
+            'description_en' => 'required',
+            'description_ru' => 'required',
+            'description_ita' => 'required',
             'image' =>'required|image|mimes:jpg,png,jpeg,svg|max:2048',
             'manufacturer_id' => 'required',
             'category_id' => 'required',
@@ -125,14 +127,21 @@ class ShopController extends Controller
     public function update(Request $request, Shop $shop){
         $shop->update([
             'name' => $request->input('name'),
+            'name_kz' => $request->input('name_kz'),
+            'name_ru' => $request->input('name_ru'),
+            'name_en' => $request->input('name_en'),
+            'name_ita' => $request->input('name_ita'),
             'price' => $request->input('price'),
             'size' => $request->input('size'),
             'description' => $request->input('description'),
+            'description_kz' => $request->input('description_kz'),
+            'description_en' => $request->input('description_en'),
+            'description_ita' => $request->input('description_ita'),
+            'description_ru' => $request->input('description_ru'),
             'image' => $request->input('image'),
             'manufacturer_id' => $request->input('manufacturer_id'),
             'category_id' => $request->input('category_id'),
         ]);
-
         return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', 'Updated Successfully');
     }
 

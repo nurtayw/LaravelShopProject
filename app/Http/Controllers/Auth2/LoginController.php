@@ -31,7 +31,7 @@ class LoginController extends Controller
                 return redirect()->intended('/adm/shops/product');
             return redirect()->intended('/shops')->with('message','logged successfully');
         }
-        return back()->withErrors('Incorrect email or password');
+        return back()->with('error', 'Incorrect email or password');
     }
 
     public function logout(){

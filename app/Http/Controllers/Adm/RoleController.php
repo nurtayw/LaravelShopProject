@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
     public function index(){
         $all = Role::all();
         return view('adm.roles.index',['roles'=>$all]);
@@ -32,7 +33,6 @@ class RoleController extends Controller
     public function update(Request $request, Role $role){
         $role->update([
             'name' => $request->input('name'),
-
         ]);
         return redirect()->route('adm.roles.index')->with('message', 'Updated Successfully');
     }
@@ -42,6 +42,5 @@ class RoleController extends Controller
         return redirect()->route('adm.roles.index')->with('error','Destroyed');
     }
 
-    public function show(){
-    }
+    public function show(){}
 }

@@ -23,9 +23,9 @@ class UserController extends Controller
 
 
     public function ban(User $user){
-            $user->update([
-                'is_active' => false,
-            ]);
+        $user->update([
+            'is_active' => false,
+        ]);
         return back()->with('message','User banned');
     }
 
@@ -53,7 +53,4 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('adm.users')->with('error','You deleted your account!!!!');
     }
-
-
-
 }
