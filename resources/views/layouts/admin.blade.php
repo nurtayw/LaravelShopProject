@@ -85,13 +85,13 @@
             {{-- Message --}}
             @if (Session::has('message'))
                 <div class="alert alert-success alert-dismissible" role="alert">
-                    <strong>Success!</strong> {{ session('message') }}
+                    {{ session('message') }}<strong>!</strong>
                 </div>
             @endif
 
             @if (Session::has('error'))
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                    <strong>Deleted</strong> {{ session('error') }}
+                    {{ session('error') }}<strong>!</strong>
                 </div>
             @endif
 

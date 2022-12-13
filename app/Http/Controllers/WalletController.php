@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class WalletController extends Controller
 {
     public function index(){
-        $all = Wallet::all();
-        return view('wallet.index', ['wallet' => $all]);
+        return view('wallet.index');
     }
 
     public function create(){
@@ -20,9 +19,9 @@ class WalletController extends Controller
 
     public function store(Request $request){
         $validated = $request->validate([
-           'money' => 'required|numeric'
+           'money' => 'required|numeric',
         ]);
-        Auth::user()->wallets()->create($validated);
+        Wallet::create($validated);
         return redirect()->route('wallet.index');
     }
 }

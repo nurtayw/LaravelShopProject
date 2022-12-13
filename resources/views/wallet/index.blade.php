@@ -10,13 +10,11 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($wallet as $w)
                 <tr>
                     <td>
-                        {{$w->user->money}}
+                        {{Auth::user()->money}}
                     </td>
             <tr>
-            @endforeach
             </tbody>
         </table>
     </div>
