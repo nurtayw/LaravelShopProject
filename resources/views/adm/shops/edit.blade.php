@@ -56,27 +56,27 @@
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">Description</label>
-                        <textarea type="text" value="{{$shop->description}}" class="form-control"  name="description" placeholder=""></textarea>
+                        <input type="text" value="{{$shop->description}}" class="form-control"  name="description" placeholder="">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">DescriptionKZ</label>
-                        <textarea type="text" value="{{$shop->description_kz}}" class="form-control  @error('description_kz') is-invalid @enderror" id="descriptionInput" name="description_kz" placeholder="Enter description"></textarea>
+                        <input type="text" value="{{$shop->description_kz}}" class="form-control  @error('description_kz') is-invalid @enderror" id="descriptionInput" name="description_kz" placeholder="Enter description"></input>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">DescriptionEN</label>
-                        <textarea type="text" value="{{$shop->description_en}}" class="form-control  @error('description_en') is-invalid @enderror" id="descriptionInput" name="description_en" placeholder="Enter description"></textarea>
+                        <input type="text" value="{{$shop->description_en}}" class="form-control  @error('description_en') is-invalid @enderror" id="descriptionInput" name="description_en" placeholder="Enter description">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">DescriptionRU</label>
-                        <textarea type="text" value="{{$shop->description_ru}}" class="form-control  @error('description_ru') is-invalid @enderror" id="descriptionInput" name="description_ru" placeholder="Enter description"></textarea>
+                        <input type="text" value="{{$shop->description_ru}}" class="form-control  @error('description_ru') is-invalid @enderror" id="descriptionInput" name="description_ru" placeholder="Enter description">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
                         <label for="contentGroup">DescriptionITA</label>
-                        <textarea type="text" value="{{$shop->description_ita}}" class="form-control  @error('description_ita') is-invalid @enderror" id="descriptionInput" name="description_ita" placeholder="Enter description"></textarea>
+                        <input type="text" value="{{$shop->description_ita}}" class="form-control  @error('description_ita') is-invalid @enderror" id="descriptionInput" name="description_ita" placeholder="Enter description">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
@@ -88,7 +88,7 @@
                         <label for="ManufacturerGroup">Manufacturer</label>
                         <select class="form-control" name="manufacturer_id">
                             @foreach($manufacturer as $mct)
-                                <option @if($mct->id == $shop->manufacturer_id) selected @endif value="{{$mct->id}}">{{ $mct->country }}</option>
+                                <option @if($mct->id == $shop->manufacturer_id) selected @endif value="{{$mct->id}}">{{ $mct->brand }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback"></div>

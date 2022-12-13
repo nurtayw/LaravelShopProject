@@ -10,7 +10,7 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'price', 'size', 'description', 'image', 'manufacturer_id', 'category_id', 'user_id'];
+    protected $fillable = ['name','name_kz','name_ru','name_en','name_ita', 'price', 'size', 'description','description_kz','description_ru','description_en','description_ita', 'image', 'manufacturer_id', 'category_id', 'user_id'];
 
 
     public function manufacturer(){
@@ -35,6 +35,10 @@ class Shop extends Model
     }
 
     public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function wallets(){
         return $this->hasMany(Comment::class);
     }
 

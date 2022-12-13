@@ -34,11 +34,11 @@ class ProfileController extends Controller
         }
 
         $avatar->update();
-        return redirect()->route('profile', ['profile' => $avatar])->with('message', 'Update successfully');
+        return redirect()->route('profile', ['profile' => $avatar])->with('message', __('validation.update_profile'));
     }
 
     public function destroy(User $profile){
         $profile->delete();
-        return redirect()->route('shops.index')->with('error', 'You are deleted your account');
+        return redirect()->route('shops.index');
     }
 }

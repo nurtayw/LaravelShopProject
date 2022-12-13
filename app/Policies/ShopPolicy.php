@@ -12,8 +12,14 @@ class ShopPolicy
 
     public function viewAny(User $user)
     {
-        return ($user->role->name != 'user');
+        return ($user->role->name == 'admin');
     }
+
+    public function viewAny1(User $user)
+    {
+        return ($user->role->name == 'moderator') || ($user->role->name == 'admin');
+    }
+
 
     public function view(User $user, Shop $phone){
         //

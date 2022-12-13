@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-           $table->string('name_kz')->nullable();
-           $table->string('name_en')->nullable();
-           $table->string('name_ru')->nullable();
-           $table->string('name_ita')->nullable();
+           $table->string('name_kz');
+           $table->string('name_en');
+           $table->string('name_ru');
+           $table->string('name_ita');
         });
     }
 

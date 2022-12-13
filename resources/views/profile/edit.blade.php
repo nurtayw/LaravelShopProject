@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="container">
-        <div class="row justify-content-center" style="margin-left: 400px; margin-top: 90px">
+        <div class="row justify-content-center" style="margin-left: 350px; margin-top: 90px">
             <div class="col-md-10">
                 <form action="{{ route('profile.update', $profile->id)}}" method="post" enctype="multipart/form-data">
                     @csrf

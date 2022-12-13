@@ -27,7 +27,7 @@ class CategoryController extends Controller
             'name_ita' => 'string|max:255',
         ]);
         Category::create($validated);
-        return redirect()->route('adm.category.index')->with('message', 'Added a new category');
+        return redirect()->route('adm.category.index')->with('message', __('validation.category_save'));
     }
 
     public function show(){}
@@ -45,11 +45,11 @@ class CategoryController extends Controller
             'name_ita' => $request->input('name_ita'),
 
         ]);
-        return redirect()->route('adm.category')->with('message', 'Updated Successfully');
+        return redirect()->route('adm.category')->with('message', __('validation.category_update'));
     }
 
     public function destroy(Category $category){
         $category->delete();
-        return redirect()->route('adm.category.index')->with('error','Destroyed');
+        return redirect()->route('adm.category.index')->with('error',__('validation.category_delete'));
     }
 }

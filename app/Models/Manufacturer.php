@@ -10,7 +10,7 @@ class Manufacturer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['country', 'code'];
+    protected $fillable = ['brand','brand_kz','brand_ru','brand_en','brand_ita'];
 
     public function shops(){
         return $this->hasMany(Shop::class);

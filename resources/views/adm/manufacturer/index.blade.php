@@ -9,7 +9,6 @@
             <thead>
             <tr>
                 <th>Country</th>
-                <th>Code</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -18,10 +17,7 @@
             @foreach($manufacturer as $mct)
                 <tr>
                     <td>
-                        {{$mct->country}}
-                    </td>
-                    <td>
-                        {{$mct->code}}
+                        {{$mct->brand}}
                     </td>
                     <td>
                         <a class="btn btn-success" href="{{route('adm.manufacturer.edit', $mct->id)}}">Edit</a>

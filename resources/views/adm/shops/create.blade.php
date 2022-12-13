@@ -75,7 +75,7 @@
                         <label for="categoryGroup">Manufacturer</label>
                         <select class="form-control  @error('manufacturer_id') is-invalid @enderror" name="manufacturer_id" id="manufacturerGroup">
                             @foreach($manufacturer as $mnr)
-                                <option value="{{$mnr->id}}">{{ $mnr->country }}</option>
+                                <option value="{{$mnr->id}}">{{ $mnr->brand }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback"></div>

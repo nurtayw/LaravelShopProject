@@ -6,12 +6,6 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
-                        <div class="shop__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
                         <div class="shop__sidebar__accordion">
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
@@ -48,7 +42,7 @@
                                                         @foreach($manufacturer as $cat)
                                                             <li>
                                                                 <a
-                                                                    href="{{ route('shops.manufacturer', $cat->id) }}">{{ $cat->{'country_'.app()->getLocale()} }}
+                                                                    href="{{ route('shops.manufacturer', $cat->id) }}">{{ $cat->{'brand_'.app()->getLocale()} }}
                                                                 </a>
                                                             </li>
                                                         @endforeach
@@ -63,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-9">
-                    <div class="row">
+                    <div class="row small">
                         <div class="card mt-3 col-4 m-lg-3">
                             <div class="product__item">
                                 @foreach($shops as $shop)

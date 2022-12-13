@@ -29,9 +29,9 @@ class LoginController extends Controller
                 return redirect()->intended('/adm/users');
             elseif (Auth::user()->role->name == 'moderator')
                 return redirect()->intended('/adm/shops/product');
-            return redirect()->intended('/shops')->with('message','logged successfully');
+            return redirect()->intended('/shops')->with('message', __('messages.log_check'));
         }
-        return back()->with('error', 'Incorrect email or password');
+        return back()->with('error', __('messages.log_err'));
     }
 
     public function logout(){

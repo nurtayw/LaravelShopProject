@@ -23,7 +23,7 @@ class RoleController extends Controller
             'name' => 'string|max:255',
         ]);
         Role::create($validated);
-        return redirect()->route('adm.roles.index')->with('message', 'Added a new role');
+        return redirect()->route('adm.roles.index')->with('message', __('validation.role_save'));
     }
 
     public function edit(Role $role){
@@ -34,12 +34,12 @@ class RoleController extends Controller
         $role->update([
             'name' => $request->input('name'),
         ]);
-        return redirect()->route('adm.roles.index')->with('message', 'Updated Successfully');
+        return redirect()->route('adm.roles.index')->with('message', __('validation.role_update'));
     }
 
     public function destroy(Role $role){
         $role->delete();
-        return redirect()->route('adm.roles.index')->with('error','Destroyed');
+        return redirect()->route('adm.roles.index')->with('error', __('validation.role_delete'));
     }
 
     public function show(){}

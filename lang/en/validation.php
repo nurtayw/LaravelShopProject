@@ -13,6 +13,29 @@ return [
     |
     */
 
+    'save_pst' => 'Product saved successfully',
+    'delete_pst' => 'Product deleted successfully',
+    'update_pst' => 'Product updated successfully',
+    'add_cart' => 'Product added in cart',
+    'delete_cart' => 'Product deleted from cart',
+    'buy_cart' => 'You have purchased this item.Please waiting for confirm',
+    'confirm_pro' => 'Confirmed',
+    'update_profile' => 'Profile updated successfully',
+    'registration' => 'Successfully registration',
+    'category_save' => 'Category saved successfully',
+    'category_update' => 'Category updated successfully',
+    'category_deleted' => 'Category deleted successfully',
+    'brand_save' => 'Brand saved',
+    'brand_update' => 'Brand updated',
+    'brand_delete' => 'Brand deleted',
+    'role_save' => 'A new role saved',
+    'role_update' => 'Role updated',
+    'role_delete' => 'Role deleted',
+    'user_ban' => 'User banned',
+    'user_unban' => 'User unbanned',
+    'role_upd' => 'Role updated',
+    'user_delete' => 'You deleted your account',
+
 
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',

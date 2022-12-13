@@ -20,15 +20,30 @@
                     @method('PUT')
 
                     <div class="form-group" style="width: 330px">
-                        <label for="titleInput">Country</label>
-                        <input type="text" value="{{$manufacturer->country}}" class="form-control @error('country') is-invalid @enderror" id="nameInput" name="country">
+                        <label for="titleInput">Brand</label>
+                        <input type="text" value="{{$manufacturer->brand}}" class="form-control @error('brand') is-invalid @enderror" id="nameInput" name="brand">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group" style="width: 330px">
-                        <label for="titleInput">Code</label>
-                        <input type="text" value="{{$manufacturer->code}}" class="form-control @error('code') is-invalid @enderror" id="nameInput" name="code">
+                        <label for="titleInput">Brand</label>
+                        <input type="text" value="{{$manufacturer->brand_kz}}" class="form-control @error('brand_kz') is-invalid @enderror" id="nameInput" name="brand_kz">
                         <div class="invalid-feedback"></div>
                     </div>
+                    <div class="form-group" style="width: 330px">
+                        <label for="titleInput">Brand</label>
+                        <input type="text" value="{{$manufacturer->brand_ru}}" class="form-control @error('brand_ru') is-invalid @enderror" id="nameInput" name="brand_ru">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group" style="width: 330px">
+                        <label for="titleInput">Brand</label>
+                        <input type="text" value="{{$manufacturer->brand_en}}" class="form-control @error('brand_en') is-invalid @enderror" id="nameInput" name="brand_en">
+                        <div class="invalid-feedback"></div>
+                    </div><div class="form-group" style="width: 330px">
+                        <label for="titleInput">Brand</label>
+                        <input type="text" value="{{$manufacturer->brand_ita}}" class="form-control @error('brand_ita') is-invalid @enderror" id="nameInput" name="brand_ita">
+                        <div class="invalid-feedback"></div>
+                    </div>
+
                     <div class="form-group mt-3">
                         <button class="btn btn-outline-success" type="submit">Update</button>
                     </div>

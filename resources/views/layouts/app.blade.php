@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion</title>
+    <title>@yield('title')</title>
 
     <!-- Google Font -->
     <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap')}}"
@@ -46,7 +46,7 @@
                     <div class="header__top__right">
                         <div class="header__top__hover">
                             <span>{{__('messages.profile')}}<i class="arrow_carrot-down"></i></span>
-                            <ul>
+                            <ul style="">
                                 @guest
                                     @if (Route::has('login.form'))
                                         <li>
@@ -61,16 +61,16 @@
                                         @endif
                                 @else
                                    <div>
-                                     <ul>
+                                     <ul style="margin-top: -17px">
                                          <li>
                                              <a style="color: black;" href="{{route('profile')}}">
                                                  {{__('messages.profile')}}
                                              </a>
                                          </li>
                                          <li>
-                                             <a style="color: black" class="nav-link" href="{{ route('logout') }}"
+                                             <a style="color: black;" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                                    document.getElementById('logout-form').submit();">
                                                  {{__('messages.logout')}}
                                              </a>
 
@@ -110,7 +110,7 @@
             <div class="col-lg-6 col-md-6">
                 <nav class="header__menu mobile-menu">
                     <ul>
-                        @can('viewAny', \App\Models\Shop::class)
+                        @can('viewAny1', \App\Models\Shop::class)
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{route('adm.shops.product')}}">AdminPanel</a></li>
                         @endcan
                         <li><a href="{{route('shops.index')}}">{{__('messages.home')}}</a></li>
@@ -119,7 +119,8 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="header__nav__option">
-                    <a href="{{route('cart.index')}}"><img src="{{asset('user2/img/icon/heart.png')}}" alt=""></a>
+                    <a href="{{route('cart.index')}}"><img src="{{asset('user2/img/icon/cart.png')}}" alt="" style="width:25px "></a>
+                    <a href="{{route('wallet.index')}}"><img src="{{asset('user2/img/icon/wallet.png')}}" alt="" style="width:25px "></a>
                 </div>
             </div>
         </div>
@@ -128,23 +129,23 @@
 
 
 {{-- Message --}}
-@if (Session::has('message'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="fa fa-times"></i>
-        </button>
-        <strong>Success !</strong> {{ session('message') }}
-    </div>
-@endif
+    @if (Session::has('message'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            {{ session('message') }}<strong>!</strong>
+        </div>
+    @endif
 
-@if (Session::has('error'))
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="fa fa-times"></i>
-        </button>
-        <strong>!!!</strong> {{ session('error') }}
-    </div>
-@endif
+    @if (Session::has('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            {{ session('error') }}<strong>!</strong>
+        </div>
+    @endif
 
 <!-- Shop Section Begin -->
 <div class="container" style="margin-top: 50px; margin-bottom: 200px;">

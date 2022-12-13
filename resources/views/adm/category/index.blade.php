@@ -9,6 +9,7 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -17,6 +18,9 @@
                 <tr>
                     <td>
                         {{$cat->name}}
+                    </td>
+                    <td>
+                        <a class="btn btn-success" href="{{route('adm.category.edit', $cat->id)}}">Edit</a>
                     </td>
                     <td>
                         <form action="{{route('adm.category.destroy',$cat->id)}}" method="post">

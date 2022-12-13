@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('manufacturers', function (Blueprint $table) {
-            $table->string('country_kz')->nullable();
-            $table->string('country_en')->nullable();
-            $table->string('country_ru')->nullable();
-            $table->string('country_ita')->nullable();
+            $table->string('brand_kz');
+            $table->string('brand_en');
+            $table->string('brand_ru');
+            $table->string('brand_ita') ;
         });
     }
 
@@ -29,10 +29,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('manufacturers', function (Blueprint $table) {
-            $table->dropColumn('country_kz');
-            $table->dropColumn('country_en');
-            $table->dropColumn('country_ru');
-            $table->dropColumn('country_ita');
+            $table->dropColumn('brand_kz');
+            $table->dropColumn('brand_en');
+            $table->dropColumn('brand_ru');
+            $table->dropColumn('brand_ita');
         });
     }
 };

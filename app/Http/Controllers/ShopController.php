@@ -16,7 +16,7 @@ class ShopController extends Controller
         $cart->update([
            'status' => 'confirmed'
         ]);
-        return back()->with('message', 'Confirmed');
+        return back()->with('message', __('validation.confirm_pro'));
     }
 
     public function cart(){
@@ -29,14 +29,14 @@ class ShopController extends Controller
         foreach($buy as $b){
             Auth::user()->postswithStatus('in_cart')->updateExistingPivot($b, ['status' => 'ordered']);
         }
-        return back()->with('message', 'You have purchased this item.Please waiting for confirm');
+        return back()->with('message', __('validation.buy_cart'));
     }
 
     public function deleteCart(Shop $shop){
         $cart =  Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->get();
         if ($cart != null)
             Auth::user()->postswithStatus('in_cart')->detach($shop->id);
-        return view('cart.index',['cart' => $cart])->with('error', 'Deleted from cart');
+        return view('cart.index',['cart' => $cart])->with('error', __('validation.delete'));
     }
 
     public function addCart(Request $request, Shop $shop){
@@ -55,7 +55,7 @@ class ShopController extends Controller
                 'quantity' => $request->input('quantity')
             ]);
         }
-        return back()->with('message', 'Successfully added in cart');
+        return back()->with('message', __('validation.add_cart'));
     }
 
     public function cartIndex(){
@@ -107,7 +107,7 @@ class ShopController extends Controller
             'description_en' => 'required',
             'description_ru' => 'required',
             'description_ita' => 'required',
-            'image' =>'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+            'image' =>'required|image|mimes:jpg,png,jpeg,svg,pdf|max:2048',
             'manufacturer_id' => 'required',
             'category_id' => 'required',
         ]);
@@ -117,7 +117,7 @@ class ShopController extends Controller
         $validated ['image'] = '/storage/'.$image_path;
         Auth::user()->shops()->create($validated);
 
-        return redirect()->route('adm.shops.product')->with('message', 'Saved successfully');
+        return redirect()->route('adm.shops.product')->with('message', __('validation.save_pst'));
     }
 
     public function edit(Shop $shop){
@@ -142,11 +142,11 @@ class ShopController extends Controller
             'manufacturer_id' => $request->input('manufacturer_id'),
             'category_id' => $request->input('category_id'),
         ]);
-        return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', 'Updated Successfully');
+        return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', __('validation.update_pst'));
     }
 
     public function destroy(Shop $shop){
         $shop->delete();
-        return redirect()->route('adm.shops.product')->with('error','Deleted');
+        return redirect()->route('adm.shops.product')->with('error', __('validation.delete_pst'));
     }
 }

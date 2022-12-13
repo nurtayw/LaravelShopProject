@@ -26,14 +26,14 @@ class UserController extends Controller
         $user->update([
             'is_active' => false,
         ]);
-        return back()->with('message','User banned');
+        return back()->with('message', __('validation.user_ban'));
     }
 
     public function unban(User $user){
         $user->update([
             'is_active' => true,
         ]);
-        return back()->with('message','User unbanned');
+        return back()->with('message', __('validation.user_unban'));
     }
 
     public function edit(User $user){
@@ -46,11 +46,11 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'role_id' => $request->input('role_id'),
         ]);
-        return redirect()->route('adm.users')->with('message', 'Updated successfully');
+        return redirect()->route('adm.users')->with('message', __('validation.role_upd'));
     }
 
     public function destroy(User $user){
         $user->delete();
-        return redirect()->route('adm.users')->with('error','You deleted your account!!!!');
+        return redirect()->route('adm.users')->with('error',  __('validation.user_delete'));
     }
 }

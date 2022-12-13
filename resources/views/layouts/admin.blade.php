@@ -46,9 +46,10 @@
                     <div class="sb-sidenav-menu-heading">Core</div>
                     <a class="nav-link" href="{{route('shops.index')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        User Page
+                        Main Page
                     </a>
                     <div class="sb-sidenav-menu-heading">Interface</div>
+                    @can('viewAny', \App\Models\Shop::class)
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         User management
@@ -56,10 +57,11 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{route('adm.users')}}">Users</a>
-                                <a class="nav-link" href="{{route('adm.roles.index')}}">Roles</a>
+                            <a class="nav-link" href="{{route('adm.users')}}">Users</a>
+                            <a class="nav-link" href="{{route('adm.roles.index')}}">Roles</a>
                         </nav>
                     </div>
+                    @endcan
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Product Management

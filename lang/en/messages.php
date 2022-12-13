@@ -23,5 +23,10 @@ return [
     'brand' => 'Brand',
     'u_cart' => 'Your cart',
     'buy' => 'Buy',
-    'com_add' => 'wqrerq'
+    'com_add' => 'Comment added successfully',
+    'com_delete' => 'Comment deleted',
+    'log_check' => 'Logged successfully',
+    'log_err' => 'Incorrect login or password',
+
+
 ];

@@ -22,5 +22,10 @@ return [
     'image' => 'Immagine',
     'brand' => 'Marca',
     'u_cart' => 'Il tuo carrello',
-    'buy' => 'Acquistare    ',
+    'buy' => 'Acquistare',
+    'com_add' => 'Commento aggiunto con successo',
+    'com_delete' => 'Commento cancellato',
+    'log_check' => 'Registrato con successo',
+    'log_err' => 'User e password non corretti',
+
 ];
