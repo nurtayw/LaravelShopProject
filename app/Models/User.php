@@ -76,4 +76,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function wallets(){
+        return $this->hasMany(Wallet::class);
+    }
+
 }

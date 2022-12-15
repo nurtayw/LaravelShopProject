@@ -9,6 +9,7 @@ return [
     'blue' => 'blue',
     'white' => 'white',
     'edit' => 'Edit',
+    'delete' => 'Delete',
     'dlt_acc' => 'Delete my account',
     'update' => 'Update',
 ];

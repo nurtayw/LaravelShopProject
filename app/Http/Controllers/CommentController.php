@@ -14,12 +14,12 @@ class CommentController extends Controller
           'shop_id' => 'required|numeric'
        ]);
      Auth::user()->comments()->create($validated);
-     return redirect()->back()->with('message', __('messages_com_add'));
+     return redirect()->back()->with('message', __('messages.com_add'));
    }
 
    public function destroy(Comment $comment){
        $this->authorize('delete', $comment);
         $comment->delete();
-        return back()->with('error', __('com_delete'));
+        return back()->with('error', __('messages.com_delete'));
    }
 }

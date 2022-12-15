@@ -9,6 +9,7 @@ return [
     'blue' => 'blu',
     'white' => 'bianca',
     'edit' => 'Modificare',
+    'delete' => 'Eliminare',
     'dlt_acc' => 'Eliminare l account',
     'update' => 'Aggiornare',
 ];

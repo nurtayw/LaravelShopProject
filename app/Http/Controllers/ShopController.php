@@ -6,12 +6,13 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Shop;
+use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-
     public function confirm(Cart $cart){
         $cart->update([
            'status' => 'confirmed'
@@ -24,16 +25,31 @@ class ShopController extends Controller
         return view('adm.cart', ['cart' => $cart]);
     }
 
-    public function buy(){
-        $buy = Auth::user()->postswithStatus('in_cart')->allRelatedIds();
-        foreach($buy as $b){
-            Auth::user()->postswithStatus('in_cart')->updateExistingPivot($b, ['status' => 'ordered']);
+    public function buy(Wallet $wallet, User $user){
+        $sum = 0;
+        $prices = Auth::user()->BoughtCart()->where('status', 'in_cart')->get();
+        foreach($prices as $q){
+            $sum = ($sum + $q->price);
         }
+        if(Auth::user()->wallets()->first()->money >= $sum) {
+            $buy = Auth::user()->postswithStatus('in_cart')->allRelatedIds();
+            foreach ($buy as $b) {
+                Auth::user()->postswithStatus('in_cart')->updateExistingPivot($b, ['status' => 'ordered']);
+            }
+        }else{
+            return back()->with('error', __('messages.no_cash'));
+        }
+        $new =  Auth::user()->wallets()->first()->money - $sum;
         return back()->with('message', __('validation.buy_cart'));
     }
 
+    public function cartIndex(){
+        $x = Auth::user()->postswithStatus('in_cart')->get();
+        return view('cart.index', ['cart' => $x]);
+    }
+
     public function deleteCart(Shop $shop){
-        $cart =  Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->get();
+        $cart =  Auth::user()->postswithStatus('in_cart')->get();
         if ($cart != null)
             Auth::user()->postswithStatus('in_cart')->detach($shop->id);
         return view('cart.index',['cart' => $cart])->with('error', __('validation.delete'));
@@ -41,7 +57,6 @@ class ShopController extends Controller
 
     public function addCart(Request $request, Shop $shop){
         $carts = Auth::user()->postswithStatus('in_cart')->where('shop_id', $shop->id)->first();
-
         if($carts != null){
             Auth::user()->postswithStatus('in_cart')->updateExistingPivot($shop->id,
                 [
@@ -58,11 +73,6 @@ class ShopController extends Controller
         return back()->with('message', __('validation.add_cart'));
     }
 
-    public function cartIndex(){
-        $x = Auth::user()->postswithStatus('in_cart')->get();
-        return view('cart.index', ['cart' => $x]);
-    }
-
     public function shopManufacturer(Manufacturer $manufacturer){
         return view('adm.shops.index', ['shops' => $manufacturer->shops, 'manufacturer' => Manufacturer::all()]);
     }
@@ -70,6 +80,7 @@ class ShopController extends Controller
     public function shopCategory(Category $category){
         return view('adm.shops.index', ['shops' => $category->shops, 'categories' => Category::all()]);
     }
+
     public function show(Shop $shop){
         return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all()]);
     }
@@ -125,7 +136,7 @@ class ShopController extends Controller
     }
 
     public function update(Request $request, Shop $shop){
-        $shop->update([
+         $validated = $request->validate([
             'name' => $request->input('name'),
             'name_kz' => $request->input('name_kz'),
             'name_ru' => $request->input('name_ru'),
@@ -142,6 +153,7 @@ class ShopController extends Controller
             'manufacturer_id' => $request->input('manufacturer_id'),
             'category_id' => $request->input('category_id'),
         ]);
+        Auth::user()->shops()->update($validated);
         return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', __('validation.update_pst'));
     }
 

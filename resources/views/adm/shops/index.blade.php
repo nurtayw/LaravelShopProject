@@ -61,9 +61,8 @@
                         <div class="card mt-3 col-4 m-lg-3">
                             <div class="product__item">
                                 @foreach($shops as $shop)
-                                <div class="product__item__pic set-bg" data-setbg="{{asset($shop->image)}}" style="margin-top: 20px">
-                                    <ul class="product__hover">
-                                    </ul>
+                                <div class="product__item__pic set-bg"  style="margin-top: 20px">
+                                    <img src="{{asset($shop->image)}}">
                                 </div>
                                 <div class="product__item__text">
                                     <h6>{{ $shop->{'name_'.app()->getLocale()} }}</h6>

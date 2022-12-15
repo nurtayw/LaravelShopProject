@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
@@ -9,8 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
-    public function index(){
-        return view('wallet.index');
+    public function index(Wallet $wallet){
+        $wallet = Wallet::all();
+        return view('wallet.index',['wallet' => $wallet]);
     }
 
     public function create(){
@@ -20,8 +22,26 @@ class WalletController extends Controller
     public function store(Request $request){
         $validated = $request->validate([
            'money' => 'required|numeric',
+           'wallet_id' => 'numeric'
         ]);
-        Wallet::create($validated);
+        Auth::user()->wallets()->create($validated);
+        return redirect()->route('wallet.index');
+    }
+
+    public function edit(Wallet $wallet){
+        return view('wallet.edit', ['wallet' => $wallet]);
+    }
+
+    public function update(Request $request, Wallet $wallet){
+        $wallet->update([
+            'money' => $request->input('money'),
+            'user_id' => $request->input('user_id'),
+        ]);
+        return redirect()->route('wallet.index');
+    }
+
+    public function destroy(Wallet $wallet){
+        $wallet->delete();
         return redirect()->route('wallet.index');
     }
 }

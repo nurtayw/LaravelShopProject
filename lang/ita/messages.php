@@ -27,5 +27,8 @@ return [
     'com_delete' => 'Commento cancellato',
     'log_check' => 'Registrato con successo',
     'log_err' => 'User e password non corretti',
+    'replenish' => 'Ricostituire',
+    'money' => 'Denaro',
+    'no_cash' => 'Non hai abbastanza soldi',
 
 ];

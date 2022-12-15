@@ -39,6 +39,9 @@ Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.la
         Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
         Route::get('/wallet/create', [WalletController::class, 'create'])->name('wallet.create');
         Route::post('/wallet/{wallet}', [WalletController::class, 'store'])->name('wallet.store');
+        Route::get('/wallet/{wallet}/edit', [WalletController::class, 'edit'])->name('wallet.edit');
+        Route::put('/wallet/{wallet}', [WalletController::class, 'update'])->name('wallet.update');
+        Route::delete('/wallet/{wallet}', [WalletController::class, 'destroy'])->name('wallet.destroy');
 
     Route::prefix('adm')->as('adm.')->middleware('hasrole:admin,moderator')->group(function (){
 

@@ -27,6 +27,10 @@ return [
     'com_delete' => 'Comment deleted',
     'log_check' => 'Logged successfully',
     'log_err' => 'Incorrect login or password',
+    'replenish' => 'Replenish',
+    'money' => 'Money',
+    'no_cash' => 'You do not have enough money',
+
 
 
 ];
