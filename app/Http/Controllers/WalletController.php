@@ -12,7 +12,7 @@ class WalletController extends Controller
 {
     public function index(Wallet $wallet){
         $wallet = Wallet::all();
-        return view('wallet.index',['wallet' => $wallet]);
+        return view('wallet.index', ['wallet' => $wallet]);
     }
 
     public function create(){

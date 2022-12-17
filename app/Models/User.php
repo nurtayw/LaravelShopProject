@@ -68,6 +68,10 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function wallets(){
+        return $this->hasMany(Wallet::class);
+    }
+
     public function comments(){
         return $this->hasMany(Comment::class);
     }
@@ -76,8 +80,9 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function wallets(){
-        return $this->hasMany(Wallet::class);
+    public function RatedShop(){
+        return $this->belongsToMany(Shop::class, 'rating')
+            ->withPivot('rating')
+            ->withTimestamps();
     }
-
 }

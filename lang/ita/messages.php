@@ -30,5 +30,32 @@ return [
     'replenish' => 'Ricostituire',
     'money' => 'Denaro',
     'no_cash' => 'Non hai abbastanza soldi',
+    'add' => 'Aggiungere',
+    'save' => 'Salva',
+
+
+    //    ************ADMIN PAGE*********************
+
+    'main' => 'Pagina principale',
+    'interface' => 'Interfaccia',
+    'user_m' => 'Gestione utenti',
+    'product_m' => 'Gestione del prodotto',
+    'users' => 'Utenti',
+    'rolos' => 'Ruoli',
+    'pro_list' => 'Elenco prodotti',
+    'cart' => 'Carrello',
+    'cat' => 'Categorie',
+    'manu' => 'Produttrice',
+    'search' => 'Ricerca',
+    'active' => 'Attiva',
+    'r' => 'Ruoli',
+    'ban' => 'Bandire',
+    'unban' => 'Sblocca',
+    'user' => 'Utente',
+    'color' => 'Colore',
+    'quantity' => 'Quantità',
+    'status' => 'Stato',
+    'confirm' => 'Confermare'
+
 
 ];

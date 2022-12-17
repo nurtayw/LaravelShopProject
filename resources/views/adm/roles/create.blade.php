@@ -9,12 +9,12 @@
                 <form action="{{ route('adm.roles.store')}}" method="post">
                     @csrf
                     <div class="form-group" style="width: 330px">
-                        <label for="titleInput">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="nameInput" name="name" placeholder="Enter name">
+                        <label for="titleInput">{{__('messages.name')}}</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="nameInput" name="name" placeholder="{{__('messages.name')}}">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mt-3">
-                        <button class="btn btn-success" type="submit">Save</button>
+                        <button class="btn btn-success" type="submit">{{__('messages.save')}}</button>
                     </div>
                 </form>
             </div>

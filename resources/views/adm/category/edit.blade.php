@@ -45,7 +45,7 @@
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mt-3">
-                        <button class="btn btn-outline-success" type="submit">Update</button>
+                        <button class="btn btn-outline-success" type="submit">{{__('messages.save')}}</button>
                     </div>
                 </form>
             </div>

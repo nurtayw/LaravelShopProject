@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Adm;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -30,10 +31,11 @@ class RoleController extends Controller
         return view('adm.roles.edit', ['roles' => $role]);
     }
 
-    public function update(Request $request, Role $role){
-        $role->update([
+    public function update(Request $request){
+        $validated = $request->validate([
             'name' => $request->input('name'),
         ]);
+        Auth::user()->role()->update($validated);
         return redirect()->route('adm.roles.index')->with('message', __('validation.role_update'));
     }
 

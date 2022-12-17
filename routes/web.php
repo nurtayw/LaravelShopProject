@@ -22,6 +22,9 @@ Route::get('/', function () {
 Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.lang');
 
     Route::middleware('auth')->group(function (){
+        Route::post('/shops/{shop}/rate', [ShopController::class, 'rate'])->name('shops.rate');
+        Route::post('/shops/{shop}/unrate', [ShopController::class, 'unrate'])->name('shops.unrate');
+
         Route::get('/profile/profile', [ProfileController::class, 'profile'])->name('profile');
         Route::get('/profile{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
@@ -59,7 +62,6 @@ Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.la
         Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
         Route::put('/cart{cart}/confirm', [ShopController::class, 'confirm'])->name('cart.confirm');
 
-
         Route::get('/shops/product', [ShopController::class, 'product'])->name('product');
         Route::get('/users', [UserController::class, 'index'])->name('users');
         Route::get('/users/search', [UserController::class, 'index'])->name('users.search');
@@ -68,7 +70,7 @@ Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.la
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::put('/users/{user}/ban', [UserController::class, 'ban'])->name('users.ban');
         Route::put('/users/{user}/unban', [UserController::class, 'unban'])->name('users.unban');
-});
+    });
 });
 Route::resource('/shops', ShopController::class)->only('index', 'show');
 Route::get('/home', [HomeController::class, 'index'])->name('home');

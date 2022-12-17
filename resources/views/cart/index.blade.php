@@ -17,7 +17,8 @@
                             <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="margin: fill; width: 230px; height: 200px;">
                             <h5 class="card-title">{{ $shop->{'name_'.app()->getLocale()} }}</h5>
                             <p class="card-text">{{ $shop->price }} $</p>
-                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 160px; margin-top: -39px">
+                            <p><b>#{{$shop->pivot->quantity}}</b></p>
+                            <form class="form-check" action="{{route('shops.uncart', $shop->id)}}" method="post" style="margin-left: 160px; margin-top: -20px">
                                 @csrf
                                 <button class="btn btn-outline-dark" onclick="return confirm('Are you sure?')" type="submit">X</button>
                             </form>

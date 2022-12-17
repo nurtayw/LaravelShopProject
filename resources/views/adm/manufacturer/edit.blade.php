@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <button class="btn btn-outline-success" type="submit">Update</button>
+                        <button class="btn btn-outline-success" type="submit">{{__('buttons.update')}}</button>
                     </div>
                 </form>
             </div>

@@ -34,7 +34,7 @@
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mt-3">
-                        <button class="btn btn-success" type="submit">Save</button>
+                        <button class="btn btn-success" type="submit">{{__('messages.save')}}</button>
                     </div>
                 </form>
             </div>

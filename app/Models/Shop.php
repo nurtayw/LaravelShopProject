@@ -34,15 +34,21 @@ class Shop extends Model
             ->withTimestamps();
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
-
     public function wallets(){
         return $this->hasMany(Wallet::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function usersRated(){
+        return $this->belongsToMany(User::class, 'rating')
+            ->withPivot('rating')
+            ->withTimestamps();
     }
 }

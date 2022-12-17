@@ -10,11 +10,11 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">User</th>
-            <th scope="col">Color</th>
-            <th scope="col">Count</th>
-            <th scope="col">Status</th>
+            <th scope="col">{{__('messages.name')}}</th>
+            <th scope="col">{{__('messages.user')}}</th>
+            <th scope="col">{{__('messages.color')}}</th>
+            <th scope="col">{{__('messages.quantity')}}</th>
+            <th scope="col">{{__('messages.status')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                     <form action="{{route('adm.cart.confirm', $cart[$i]->id)}}" method="post">
                         @csrf
                         @method('PUT')
-                        <button class="btn btn-success" type="submit">Confirm</button>
+                        <button class="btn btn-success" type="submit">{{__('messages.confirm')}}</button>
                     </form>
                 </td>
             </tr>

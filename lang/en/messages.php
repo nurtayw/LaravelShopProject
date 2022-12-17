@@ -30,6 +30,32 @@ return [
     'replenish' => 'Replenish',
     'money' => 'Money',
     'no_cash' => 'You do not have enough money',
+    'add' => 'Add',
+    'save' => 'Save',
+
+
+//    ************ADMIN PAGE*********************
+
+    'main' => 'Main Page',
+    'interface' => 'Interface',
+    'user_m' => 'User Management',
+    'product_m' => 'Product Management',
+    'users' => 'Users',
+    'rolos' => 'Roles',
+    'pro_list' => 'Product List',
+    'cart' => 'Cart',
+    'cat' => 'Categories',
+    'manu' => 'Manufacturer',
+    'search' => 'Search',
+    'active' => 'Active',
+    'r' => 'Role',
+    'ban' => 'Ban',
+    'unban' => 'Unban',
+    'user' => 'User',
+    'color' => 'Color',
+    'quantity' => 'Quantity',
+    'status' => 'Status',
+    'confirm' => 'Confirm'
 
 
 

@@ -37,6 +37,27 @@
                                     {{__('buttons.cart')}}
                                 </button>
                             </form>
+                            @if($avg != 0)
+                                <p>Rate: {{$avg}}</p>
+                                <i class="fa fa-star"></i>
+                            @endif
+                            @auth
+                                <form action="{{route('shops.rate', $shop->id)}}" method="post">
+                                    @csrf
+                                    <select name="rating">
+                                        @for($i=0; $i<=5; $i++)
+                                            <option {{$myrated == $i ? 'selected' : ''}} value="{{$i}}">
+                                                {{$i==0 ? 'Not Rated' : $i}}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                    <button type="submit" class="btn btn-success">Rate</button>
+                                </form>
+                                <form action="{{route('shops.unrate', $shop->id)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">UnRate</button>
+                                </form>
+                            @endauth
                         </div>
                     </div>
                 </div>

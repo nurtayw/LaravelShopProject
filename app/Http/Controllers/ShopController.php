@@ -10,9 +10,35 @@ use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
+
+    public function unrate(Shop $shop){
+        $rated =  Auth::user()->RatedShop()->where('shop_id', $shop->id)->first();
+
+        if($rated != null){
+            Auth::user()->RatedShop()->detach($shop->id);
+        }
+        return back();
+    }
+
+    public function rate(Request $request, Shop $shop){
+        $request->validate([
+           'rating' => 'required'
+        ]);
+
+        $rated =  Auth::user()->RatedShop()->where('shop_id', $shop->id)->first();
+
+        if($rated != null){
+            Auth::user()->RatedShop()->updateExistingPivot($shop->id, ['rating' => $request->input('rating')]);
+        }else {
+            Auth::user()->RatedShop()->attach($shop->id, ['rating' => $request->input('rating')]);
+        }
+        return back();
+    }
+
     public function confirm(Cart $cart){
         $cart->update([
            'status' => 'confirmed'
@@ -25,11 +51,11 @@ class ShopController extends Controller
         return view('adm.cart', ['cart' => $cart]);
     }
 
-    public function buy(Wallet $wallet, User $user){
+    public function buy(){
         $sum = 0;
         $prices = Auth::user()->BoughtCart()->where('status', 'in_cart')->get();
         foreach($prices as $q){
-            $sum = ($sum + $q->price);
+            $sum = ($sum + $q->price)*$q->pivot->quantity;
         }
         if(Auth::user()->wallets()->first()->money >= $sum) {
             $buy = Auth::user()->postswithStatus('in_cart')->allRelatedIds();
@@ -40,6 +66,10 @@ class ShopController extends Controller
             return back()->with('error', __('messages.no_cash'));
         }
         $new =  Auth::user()->wallets()->first()->money - $sum;
+        DB::table('wallets')
+            ->where('user_id', Auth::user()->id)
+            ->update(['money' => $new]);
+
         return back()->with('message', __('validation.buy_cart'));
     }
 
@@ -82,7 +112,24 @@ class ShopController extends Controller
     }
 
     public function show(Shop $shop){
-        return view('adm.shops.show', ['shop' => $shop, 'categories' => Category::all()]);
+        $myrated = 0;
+        $avg = 0;
+        $sum = 0;
+        if (Auth::check()){
+            $rated =  Auth::user()->RatedShop()->where('shop_id', $shop->id)->first();
+            if ($rated != null){
+                $myrated = $rated->pivot->rating;
+            }
+        }
+
+        $average = $shop->usersRated()->get();
+        foreach ($average as $av){
+            $sum += $av->pivot->rating;
+        }
+        if (count($average) > 0)
+            $avg = $sum/count($average);
+
+        return view('adm.shops.show', ['avg' => $avg,'myrated' => $myrated,'shop' => $shop, 'categories' => Category::all()]);
     }
 
     public function product(Request $request){

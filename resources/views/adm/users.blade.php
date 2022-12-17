@@ -8,8 +8,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">@</span>
             </div>
-            <input type="text" name="search" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-            <button class="btn btn-success">Search</button>
+            <input type="text" name="search" class="form-control" placeholder="{{__('messages.search')}}" aria-label="Username" aria-describedby="basic-addon1">
+            <button class="btn btn-success">{{__('messages.search')}}</button>
         </div>
     </form>
 
@@ -19,12 +19,12 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">Active</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">{{__('messages.name')}}</th>
+                <th scope="col">{{__('messages.email')}}</th>
+                <th scope="col">{{__('messages.r')}}</th>
+                <th scope="col">{{__('messages.active')}}</th>
+                <th scope="col">{{__('buttons.edit')}}</th>
+                <th scope="col">{{__('buttons.delete')}}</th>
             </tr>
     </thead>
         <tbody>
@@ -46,21 +46,21 @@
                         @method('PUT')
                         <button style="width: 80px;" class="btn {{$users[$i]->is_active ? 'btn-danger' : 'btn-success'}}" type="submit">
                             @if($users[$i]->is_active)
-                                Ban
+                                {{__('messages.ban')}}
                             @else
-                                Unban
+                                {{__('messages.unban')}}
                             @endif
                         </button>
                     </form>
                 </td>
                 <td>
-                    <a href="{{route('adm.users.edit', $users[$i]->id)}}" class="btn btn-success">EDIT</a>
+                    <a href="{{route('adm.users.edit', $users[$i]->id)}}" class="btn btn-success">{{__('buttons.edit')}}</a>
                 </td>
                 <td>
                    <form action="{{route('adm.users.destroy', $users[$i]->id)}} " method="post">
                        @csrf
                        @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">DELETE</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">{{__('buttons.delete')}}</button>
                    </form>
                 </td>
             </tr>
