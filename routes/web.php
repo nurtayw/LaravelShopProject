@@ -52,7 +52,6 @@ Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.la
         Route::resource('/manufacturer', ManufacturerController::class);
         Route::resource('/roles', RoleController::class);
 
-        Route::put('/shops/product', [ShopController::class, 'product'])->name('shops.product');
         Route::get('/shops/search', [ShopController::class, 'product'])->name('shops.search');
         Route::put('/shops/{shop}', [ShopController::class, 'update'])->name('shops.update');
         Route::get('/shops/create', [ShopController::class, 'create'])->name('shops.create');
@@ -61,7 +60,7 @@ Route::get('lang/{lang}',[LangController::class, 'switchLang'])->name('switch.la
         Route::delete('/shops/{shop}', [ShopController::class, 'destroy'])->name('shops.destroy');
         Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
         Route::put('/cart{cart}/confirm', [ShopController::class, 'confirm'])->name('cart.confirm');
-
+        Route::put('/shops/product', [ShopController::class, 'product'])->name('shops.product');
         Route::get('/shops/product', [ShopController::class, 'product'])->name('product');
         Route::get('/users', [UserController::class, 'index'])->name('users');
         Route::get('/users/search', [UserController::class, 'index'])->name('users.search');

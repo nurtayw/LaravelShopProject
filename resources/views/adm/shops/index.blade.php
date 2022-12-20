@@ -58,9 +58,9 @@
                 </div>
                 <div class="col-9">
                     <div class="row small">
+                        @foreach($shops as $shop)
                         <div class="card mt-3 col-4 m-lg-3">
                             <div class="product__item">
-                                @foreach($shops as $shop)
                                 <div class="product__item__pic set-bg"  style="margin-top: 20px">
                                     <img src="{{asset($shop->image)}}">
                                 </div>
@@ -77,9 +77,9 @@
                                 </div>
                                     <a href="{{ route('shops.show', $shop->id) }}" class="flex-sm-row btn " style="background: #000000; color: white">{{__('buttons.choose')}}</a>
                                     <hr>
-                                @endforeach
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

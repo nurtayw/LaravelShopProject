@@ -55,7 +55,10 @@ return [
     'color' => 'Color',
     'quantity' => 'Quantity',
     'status' => 'Status',
-    'confirm' => 'Confirm'
+    'confirm' => 'Confirm',
+    'w_add' => 'Wallet added',
+    'w_u' => 'Wallet updated',
+    'w_d' => 'Wallet deleted',
 
 
 

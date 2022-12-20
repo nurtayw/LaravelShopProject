@@ -29,7 +29,7 @@ class WalletController extends Controller
     }
 
     public function edit(Wallet $wallet){
-        return view('wallet.edit', ['wallet' => $wallet]);
+        return view('wallet.edit', ['wallet' => $wallet])->with('message', __('messages.w_add'));
     }
 
     public function update(Request $request, Wallet $wallet){
@@ -37,11 +37,11 @@ class WalletController extends Controller
             'money' => $request->input('money'),
             'user_id' => $request->input('user_id'),
         ]);
-        return redirect()->route('wallet.index');
+        return redirect()->route('wallet.index')->with('message', __('messages.w_u'));
     }
 
     public function destroy(Wallet $wallet){
         $wallet->delete();
-        return redirect()->route('wallet.index');
+        return redirect()->route('wallet.index')->with('error', __('messages.w_d'));
     }
 }

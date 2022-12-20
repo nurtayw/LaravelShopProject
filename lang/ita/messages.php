@@ -55,7 +55,11 @@ return [
     'color' => 'Colore',
     'quantity' => 'Quantità',
     'status' => 'Stato',
-    'confirm' => 'Confermare'
+    'confirm' => 'Confermare',
+    'w_add' => 'Portafoglio aggiunto',
+    'w_u' => 'Portafoglio aggiornato',
+    'w_d' => 'Portafoglio eliminato',
+
 
 
 ];
