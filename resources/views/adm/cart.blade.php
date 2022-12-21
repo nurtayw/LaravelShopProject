@@ -15,6 +15,7 @@
             <th scope="col">{{__('messages.color')}}</th>
             <th scope="col">{{__('messages.quantity')}}</th>
             <th scope="col">{{__('messages.status')}}</th>
+            <th scope="col">{{__('messages.confirm')}}</th>
         </tr>
         </thead>
         <tbody>

@@ -14,11 +14,6 @@
                             <h5 class="my-3">{{Auth::user()->name}}</h5>
                             <div class="d-flex justify-content-center mb-2">
                                 <a type="submit" class="btn btn-primary" href="{{route('profile.edit', Auth::user()->id)}}">{{__('buttons.edit')}}</a>
-                                <form action="{{route('profile.destroy', Auth::user()->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger ms-1">{{__('buttons.dlt_acc')}}</button>
-                                </form>
                             </div>
                         </div>
                     </div>

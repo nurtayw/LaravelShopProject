@@ -12,7 +12,7 @@ class CartPolicy
     use HandlesAuthorization;
 
 
-    public function view(){
-        return Auth::user()->postswithStatus('in_cart') == null;
-    }
+//    public function view(){
+//        return Auth::user()->postswithStatus('in_cart') == null;
+//    }
 }

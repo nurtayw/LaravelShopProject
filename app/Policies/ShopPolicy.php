@@ -19,31 +19,4 @@ class ShopPolicy
     {
         return ($user->role->name == 'moderator') || ($user->role->name == 'admin');
     }
-
-
-    public function view(User $user, Shop $phone){
-        //
-    }
-
-    public function create(User $user){
-        //
-    }
-
-
-    public function update(User $user, Shop $phone){
-        //
-    }
-
-
-    public function delete(User $user, Shop $phone){
-
-    }
-
-    public function restore(User $user, Shop $phone){
-        //
-    }
-
-    public function forceDelete(User $user, Shop $phone){
-        //
-    }
 }

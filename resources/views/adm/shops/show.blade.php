@@ -18,7 +18,6 @@
                                         <h5 class="card-title">{{ __('messages.name') }}: {{ $shop->{'name_'.app()->getLocale()} }}</h5>
                                         <p class="card-text">{{ __('messages.price') }}: {{$shop->price }} $</p>
                                         <p class="card-text">{{ __('messages.size') }}: {{$shop->size }}</p>
-                                        <p class="card-text">{{ __('messages.manufacturer') }}: {{ $shop->{'mname_'.app()->getLocale()} }}</p>
                                         <p class="card-text">{{ __('messages.description') }}: {{ $shop->{'description_'.app()->getLocale()} }}</p>
                                     </td>
                                 </tr>
@@ -39,7 +38,6 @@
                             </form>
                             @if($avg != 0)
                                 <p>Rate: {{$avg}}</p>
-                                <i class="fa fa-star"></i>
                             @endif
                             @auth
                                 <form action="{{route('shops.rate', $shop->id)}}" method="post">
@@ -52,10 +50,6 @@
                                         @endfor
                                     </select>
                                     <button type="submit" class="btn btn-success">Rate</button>
-                                </form>
-                                <form action="{{route('shops.unrate', $shop->id)}}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">UnRate</button>
                                 </form>
                             @endauth
                         </div>

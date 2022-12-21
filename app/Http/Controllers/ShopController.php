@@ -129,7 +129,7 @@ class ShopController extends Controller
         if (count($average) > 0)
             $avg = $sum/count($average);
 
-        return view('adm.shops.show', ['avg' => $avg,'myrated' => $myrated,'shop' => $shop, 'categories' => Category::all()]);
+        return view('adm.shops.show', ['avg' => $avg,'myrated' => $myrated,'shop' => $shop, 'categories' => Category::all(), 'brand' => Manufacturer::all()]);
     }
 
     public function product(Request $request){
@@ -183,7 +183,7 @@ class ShopController extends Controller
     }
 
     public function update(Request $request, Shop $shop){
-         $validated = $request->validate([
+        $shop->update([
             'name' => $request->input('name'),
             'name_kz' => $request->input('name_kz'),
             'name_ru' => $request->input('name_ru'),
@@ -200,7 +200,11 @@ class ShopController extends Controller
             'manufacturer_id' => $request->input('manufacturer_id'),
             'category_id' => $request->input('category_id'),
         ]);
-        Auth::user()->shops()->update($validated);
+
+//        $fillname = time().$request->file('image')->getClientOriginalName();
+//        $image_path = $request->file('image')->storeAs('shops', $fillname, 'public');
+//        $validated ['image'] = '/storage/'.$image_path;
+//        Auth::user()->shops()->create($validated);
         return redirect()->route('adm.shops.product',['manufacturer' => Manufacturer::all()])->with('message', __('validation.update_pst'));
     }
 

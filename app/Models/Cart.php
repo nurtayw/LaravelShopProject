@@ -12,7 +12,7 @@ class Cart extends Pivot
     use HasFactory;
 
     protected $table = 'shop_user';
-    protected $fillable = ['post_id', 'shop_id', 'quantity', 'color', 'status'];
+    protected $fillable = ['user_id', 'shop_id', 'quantity', 'color', 'status'];
 
     public function shop(){
         return $this->belongsTo(Shop::class);

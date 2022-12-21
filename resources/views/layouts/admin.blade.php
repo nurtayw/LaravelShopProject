@@ -81,7 +81,7 @@
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{route('adm.shops.product')}}">{{__('messages.pro_list')}}</a>
-                            <a class="nav-link" href="{{route('adm.cart')}}">Cart</a>
+                            <a class="nav-link" href="{{route('adm.cart')}}">{{__('messages.cart')}}</a>
                             <a class="nav-link" href="{{route('adm.category.index')}}">{{__('messages.cat')}}</a>
                             <a class="nav-link" href="{{route('adm.manufacturer.index')}}">{{__('messages.manu')}}</a>
                         </nav>
