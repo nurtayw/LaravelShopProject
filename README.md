@@ -12,3 +12,7 @@ Admin Panel admin/moderator/and other roles:
 
 
 User can create/delete - comment, Cart, Wallet, Profile.
+
+
+------------------------------ 
+YouTube video - https://www.youtube.com/watch?v=R6SWKqfQMg8&t=1s
