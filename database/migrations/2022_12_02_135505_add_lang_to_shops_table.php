@@ -14,15 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::table('shops', function (Blueprint $table) {
-            $table->string('name_kz');
-            $table->string('name_en');
-            $table->string('name_ru');
-            $table->string('name_ita');
+            $table->text('name_kz');
+            $table->text('name_en');
+            $table->text('name_ru');
+            $table->text('name_ita');
 
-            $table->string('description_kz');
-            $table->string('description_en');
-            $table->string('description_ru');
-            $table->string('description_ita');
+            $table->text('description_kz');
+            $table->text('description_en');
+            $table->text('description_ru');
+            $table->text('description_ita');
+
         });
     }
 

@@ -12,7 +12,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="width: 250px; height: 250px;">
+                                        <img src="{{asset($shop->image)}}" class="card-img-top" alt="" style="width: 650px; height: 250px;">
                                     </td>
                                     <td style="padding-left: 50px">
                                         <h5 class="card-title">{{ __('messages.name') }}: {{ $shop->{'name_'.app()->getLocale()} }}</h5>

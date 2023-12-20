@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'name_ita' => $request->input('name_ita'),
 
         ]);
-        return redirect()->route('adm.category')->with('message', __('validation.category_update'));
+        return redirect()->route('adm.category.index')->with('message', __('validation.category_update'));
     }
 
     public function destroy(Category $category){
